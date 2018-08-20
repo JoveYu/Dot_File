@@ -1,0 +1,27 @@
+[user]
+    name = yushijun
+    email = yushijun110@126.com
+[core]
+    editor = vim
+    quotepath = false
+[branch]
+    autosetuprebase = always
+[push]
+    default = current
+[color]
+    ui = auto
+[rerere]
+    enabled = true
+[alias]
+    a = add
+    b = branch
+    co = checkout
+    ci = commit
+    d = diff
+    rb = rebase
+    s = status
+    l = log
+    lp = log -p
+    lo = log --pretty=format:"%h' ':' '%ci' ':' '%cn' ':' '%s" --graph
+    p = pull
+    t = tag

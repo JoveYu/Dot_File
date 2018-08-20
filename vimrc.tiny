@@ -1,0 +1,12 @@
+set nu
+syntax on
+set nowrap
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set textwidth=120
+set expandtab
+set fileformat=unix
+set showmatch
+set encoding=utf-8
+set wrap
