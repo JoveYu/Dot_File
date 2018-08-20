@@ -22,7 +22,7 @@ ZSH_THEME_VIRTUALENV_PREFIX="%{$fg[blue]%}[py:"
 ZSH_THEME_VIRTUALENV_SUFFIX="]%{$reset_color%}"
 
 # Combine it all into a final right-side prompt
-RPS1='%{$fg[green]%}%n@%m %{$reset_color%}'
+RPS1='%n@%m '
 RPS1+='$(git_custom_status)'
 RPS1+='$(virtualenv_prompt_info)'
 RPS1+='$(ruby_prompt_info)'
