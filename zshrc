@@ -26,7 +26,8 @@ alias cnpm="npm --registry=https://registry.npm.taobao.org \
 --userconfig=$HOME/.cnpmrc"
 
 # export
-export GOPATH=$HOME/.go_path
+export NVM_DIR="$HOME/.nvm"
+export GOPATH="$HOME/.go_path"
 export PATH=$PATH:$HOME/.npm/bin/:$GOPATH/bin/
 export EDITOR="nvim"
 export TERM=xterm-256color
@@ -40,5 +41,3 @@ if [ -e ~/work/python3/bin/activate ]
 then
     source ~/work/python3/bin/activate
 fi
-export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"

@@ -50,10 +50,10 @@ Plugin 'zchee/deoplete-jedi'
 Plugin 'zchee/deoplete-go'
 "Plugin 'autozimu/LanguageClient-neovim'
 "Plugin 'carlitux/deoplete-ternjs'
-if !has('nvim') " vim8 dep
-    Plugin 'roxma/nvim-yarp'
-    Plugin 'roxma/vim-hug-neovim-rpc'
-endif
+"if !has('nvim') " vim8 dep
+"    Plugin 'roxma/nvim-yarp'
+"    Plugin 'roxma/vim-hug-neovim-rpc'
+"endif
 
 " PYTHON
 Plugin 'klen/python-mode'
