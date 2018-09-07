@@ -41,3 +41,16 @@ if [ -e ~/work/python3/bin/activate ]
 then
     source ~/work/python3/bin/activate
 fi
+use_python2() {
+    deactivate
+    source ~/work/python2/bin/activate
+}
+use_python3() {
+    deactivate
+    source ~/work/python3/bin/activate
+}
+
+if [ -e ~/.zshrc.local ]
+then
+    source  ~/.zshrc.local
+fi

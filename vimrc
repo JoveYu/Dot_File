@@ -133,7 +133,7 @@ endif
 
 "============= UI ==============
 if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-    color solarized             " Load a colorscheme
+    colorscheme solarized             " Load a colorscheme
 endif
   
 set tabpagemax=15               " Only show 15 tabs
@@ -179,7 +179,7 @@ set completeopt=menu,preview,longest
 
 "============== FORMAT ==============
 
-set wrap                      " wrap long lines
+set wrap                        " wrap long lines
 set autoindent                  " Indent at the same level of the previous line
 set shiftwidth=4                " Use indents of 4 spaces
 set expandtab                   " Tabs are spaces, not tabs
@@ -195,6 +195,7 @@ autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,pe
 "autocmd FileType go autocmd BufWritePre <buffer> Fmt
 autocmd FileType vue,javascript,scss,css,html,haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
 autocmd FileType vue syntax sync fromstart
+autocmd FileType crontab setlocal nobackup nowritebackup
 
 " ============ KEY MAP ==============
 let mapleader = ','
