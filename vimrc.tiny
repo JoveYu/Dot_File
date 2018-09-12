@@ -10,3 +10,4 @@ set fileformat=unix
 set showmatch
 set encoding=utf-8
 set wrap
+set background=dark
