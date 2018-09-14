@@ -42,6 +42,9 @@ if dein#load_state('~/.cache/dein')
     call dein#add('majutsushi/tagbar')
 
     " COMPLETE
+    call dein#add('Shougo/deoplete.nvim')
+    "call dein#add('zchee/deoplete-jedi')
+    "call dein#add('zchee/deoplete-go')
     call dein#add('Shougo/echodoc.vim')
     "call dein#add('Shougo/neocomplete.vim.git')
     call dein#add('Shougo/neosnippet')
@@ -49,13 +52,9 @@ if dein#load_state('~/.cache/dein')
     "call dein#add('Valloric/YouCompleteMe')
     "call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
-    call dein#add('Shougo/deoplete.nvim')
     call dein#add('Shougo/neco-syntax')
     call dein#add('Shougo/neco-vim')
-    "call dein#add('zchee/deoplete-jedi')
-    "call dein#add('zchee/deoplete-go')
     call dein#add('autozimu/LanguageClient-neovim')
-    "call dein#add('carlitux/deoplete-ternjs')
     if !has('nvim') " vim8 dep
         call dein#add('roxma/nvim-yarp')
         call dein#add('roxma/vim-hug-neovim-rpc')
@@ -145,6 +144,7 @@ if dein#tap('vim-colors-solarized')
     colorscheme solarized             " Load a colorscheme
 endif
   
+set guifont=Monaco:h14
 set tabpagemax=15               " Only show 15 tabs
 set noshowmode                    " Display the current mode
 
@@ -185,7 +185,9 @@ set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
 set completeopt=menu,preview,longest
-set previewheight=10
+set pumheight=10
+set previewheight=5
+
 
 "============== FORMAT ==============
 
@@ -379,25 +381,29 @@ if dein#tap('LanguageClient-neovim')
     " Required for operations modifying multiple buffers like rename.
     set hidden
 
+    " ref: https://spacevim.org/layers/language-server-protocol/
     " pip install python-language-server
     " npm install vue-language-server -g
     " npm install bash-language-server -g
+    " npm install typescript-language-server -g
+    " npm install vscode-html-languageserver-bin -g
     let g:LanguageClient_serverCommands = {
         \ 'python': ['pyls'],
         \ 'vue': ['vls'],
         \ 'sh': ['bash-language-server', 'start'],
+        \ 'javascript': ['javascript-typescript-stdio'],
+        \ 'typescript': ['typescript-language-server', '--stdio'],
+        \ 'html': ['html-languageserver', '--stdio'],
+        \ 'c': ['clangd'],
+        \ 'cpp': ['clangd'],
+        \ 'objc': ['clangd'],
+        \ 'objcpp': ['clangd'],
         \ }
+    " Or map each action separately
+    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> rn :call LanguageClient#textDocument_rename()<CR>
 
-    nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
-    nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
-    nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
-    nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
-    nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
-    nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
-    nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
-    nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
 endif
 
 " echodoc
@@ -634,7 +640,7 @@ if dein#tap('neosnippet')
     xmap <C-k> <Plug>(neosnippet_expand_target)
 
     " Use honza's snippets.
-    let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+    let g:neosnippet#snippets_directory='~/.cache/dein/repos/github.com/honza/vim-snippets/snippets'
 
     " Enable neosnippet snipmate compatibility mode
     let g:neosnippet#enable_snipmate_compatibility = 1
@@ -801,3 +807,10 @@ function! InitializeDirectories()
     endfor
 endfunction
 call InitializeDirectories()
+
+au BufEnter ?* call PreviewHeightWorkAround()
+function! PreviewHeightWorkAround()
+  if &previewwindow
+    exec 'setlocal winheight='.&previewheight
+  endif
+endfunc
