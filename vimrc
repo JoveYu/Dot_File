@@ -1,100 +1,107 @@
 " vim config for jove
 
 "============ VUNDLE ==================
+if &compatible
+    set nocompatible
+endif
+" Add the dein installation directory into runtimepath
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+if dein#load_state('~/.cache/dein')
+    call dein#begin('~/.cache/dein')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+    call dein#add('~/.cache/dein')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'spf13/vim-colors'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tacahiroy/ctrlp-funky'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'mbbill/undotree'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'mhinz/vim-signify'
-Plugin 'tpope/vim-abolish.git'
-Plugin 'rhysd/conflict-marker.vim'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-commentary'
-Plugin 'godlygeek/tabular'
-Plugin 'majutsushi/tagbar'
+    call dein#add('VundleVim/Vundle.vim')
+    call dein#add('scrooloose/nerdtree')
+    call dein#add('altercation/vim-colors-solarized')
+    call dein#add('spf13/vim-colors')
+    call dein#add('tpope/vim-surround')
+    call dein#add('tpope/vim-repeat')
+    call dein#add('ctrlpvim/ctrlp.vim')
+    call dein#add('tacahiroy/ctrlp-funky')
+    call dein#add('terryma/vim-multiple-cursors')
+    call dein#add('vim-airline/vim-airline')
+    call dein#add('vim-airline/vim-airline-themes')
+    call dein#add('easymotion/vim-easymotion')
+    call dein#add('jistr/vim-nerdtree-tabs')
+    call dein#add('flazz/vim-colorschemes')
+    call dein#add('mbbill/undotree')
+    call dein#add('nathanaelkane/vim-indent-guides')
+    call dein#add('mhinz/vim-signify')
+    call dein#add('tpope/vim-abolish.git')
+    call dein#add('rhysd/conflict-marker.vim')
+    call dein#add('jiangmiao/auto-pairs')
+    call dein#add('scrooloose/syntastic')
+    call dein#add('tpope/vim-fugitive')
+    call dein#add('scrooloose/nerdcommenter')
+    call dein#add('tpope/vim-commentary')
+    call dein#add('godlygeek/tabular')
+    call dein#add('majutsushi/tagbar')
 
-" COMPLETE
-"Plugin 'Shougo/neocomplete.vim.git'
-Plugin 'Shougo/neosnippet'
-"Plugin 'Shougo/neosnippet-snippets'
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'Shougo/neco-syntax'
-Plugin 'Shougo/neco-vim'
-Plugin 'zchee/deoplete-jedi'
-Plugin 'zchee/deoplete-go'
-"Plugin 'autozimu/LanguageClient-neovim'
-"Plugin 'carlitux/deoplete-ternjs'
-"if !has('nvim') " vim8 dep
-"    Plugin 'roxma/nvim-yarp'
-"    Plugin 'roxma/vim-hug-neovim-rpc'
-"endif
+    " COMPLETE
+    call dein#add('Shougo/echodoc.vim')
+    "call dein#add('Shougo/neocomplete.vim.git')
+    call dein#add('Shougo/neosnippet')
+    "call dein#add('Shougo/neosnippet-snippets')
+    "call dein#add('Valloric/YouCompleteMe')
+    "call dein#add('SirVer/ultisnips')
+    call dein#add('honza/vim-snippets')
+    call dein#add('Shougo/deoplete.nvim')
+    call dein#add('Shougo/neco-syntax')
+    call dein#add('Shougo/neco-vim')
+    "call dein#add('zchee/deoplete-jedi')
+    "call dein#add('zchee/deoplete-go')
+    call dein#add('autozimu/LanguageClient-neovim')
+    "call dein#add('carlitux/deoplete-ternjs')
+    if !has('nvim') " vim8 dep
+        call dein#add('roxma/nvim-yarp')
+        call dein#add('roxma/vim-hug-neovim-rpc')
+    endif
 
-" PYTHON
-Plugin 'klen/python-mode'
-Plugin 'yssource/python.vim'
-Plugin 'python_match.vim'
-Plugin 'pythoncomplete'
-Plugin 'davidhalter/jedi-vim'
+    " PYTHON
+    " call dein#add('klen/python-mode')
+    call dein#add('yssource/python.vim')
+    call dein#add('vim-scripts/python_match.vim')
+    call dein#add('vim-scripts/pythoncomplete')
+    "call dein#add('davidhalter/jedi-vim')
 
-" JS
-Plugin 'elzr/vim-json'
-Plugin 'pangloss/vim-javascript'
-Plugin 'briancollins/vim-jst'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'posva/vim-vue'
-Plugin 'digitaltoad/vim-pug'
-"Plugin 'ternjs/tern_for_vim'
+    " JS
+    call dein#add('elzr/vim-json')
+    call dein#add('pangloss/vim-javascript')
+    call dein#add('briancollins/vim-jst')
+    call dein#add('kchmck/vim-coffee-script')
+    call dein#add('posva/vim-vue')
+    call dein#add('digitaltoad/vim-pug')
+    "call dein#add('ternjs/tern_for_vim')
 
-" HTML
-"Plugin 'amirh/HTML-AutoCloseTag'
-"Plugin 'gorodinskiy/vim-coloresque'
-Plugin 'mattn/emmet-vim'
-"Plugin 'Valloric/MatchTagAlways'
+    " HTML
+    "call dein#add('amirh/HTML-AutoCloseTag')
+    "call dein#add('gorodinskiy/vim-coloresque')
+    call dein#add('mattn/emmet-vim')
+    "call dein#add('Valloric/MatchTagAlways')
 
-" CSS
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'groenewege/vim-less'
-Plugin 'tpope/vim-haml'
-Plugin 'cakebaker/scss-syntax.vim'
+    " CSS
+    call dein#add('hail2u/vim-css3-syntax')
+    call dein#add('groenewege/vim-less')
+    call dein#add('tpope/vim-haml')
+    call dein#add('cakebaker/scss-syntax.vim')
 
-" GO
-"Plugin 'fatih/vim-go'
+    " GO
+    "call dein#add('fatih/vim-go')
 
-" THRIFT
-Plugin 'solarnz/thrift.vim'
+    " THRIFT
+    call dein#add('solarnz/thrift.vim')
 
-" MARKDOWN
-Plugin 'plasticboy/vim-markdown'
-Plugin 'JamshedVesuna/vim-markdown-preview'
+    " MARKDOWN
+    call dein#add('plasticboy/vim-markdown')
+    call dein#add('JamshedVesuna/vim-markdown-preview')
 
-call vundle#end()            " required
+    call dein#end()
+    call dein#save_state()
+endif
 filetype plugin indent on    " required
+syntax enable
 
 "============ GENERAL ==============
 set t_Co=256
@@ -137,7 +144,7 @@ if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"
 endif
   
 set tabpagemax=15               " Only show 15 tabs
-set showmode                    " Display the current mode
+set noshowmode                    " Display the current mode
 
 set cursorline                  " Highlight current line
 " if has('cmdline_info')
@@ -176,6 +183,7 @@ set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
 set completeopt=menu,preview,longest
+set previewheight=10
 
 "============== FORMAT ==============
 
@@ -292,6 +300,37 @@ augroup END
 
 "========== PLUGIN ============
 
+" Language server
+if isdirectory(expand("~/.vim/bundle/LanguageClient-neovim"))
+    " Required for operations modifying multiple buffers like rename.
+    set hidden
+
+    " pip install python-language-server
+    " npm install vue-language-server -g
+    " npm install bash-language-server -g
+    let g:LanguageClient_serverCommands = {
+        \ 'python': ['pyls'],
+        \ 'vue': ['vls'],
+        \ 'sh': ['bash-language-server', 'start'],
+        \ }
+
+    nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
+    nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
+    nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
+    nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
+    nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
+    nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
+    nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
+    nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
+endif
+
+" echodoc
+if isdirectory(expand("~/.vim/bundle/echodoc.vim"))
+    let g:echodoc#enable_at_startup=1
+endif
+
 " syntastic
 if isdirectory(expand("~/.vim/bundle/syntastic"))
     let g:syntastic_python_checkers = ['pyflakes']
@@ -309,14 +348,6 @@ if isdirectory(expand("~/.vim/bundle/deoplete.nvim"))
      \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
     smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-
-    " ternjs file type
-    let g:deoplete#sources#ternjs#filetypes = [
-        \ 'jsx',
-        \ 'javascript.jsx',
-        \ 'vue',
-        \ ]
 
 endif
 
@@ -703,4 +734,3 @@ function! InitializeDirectories()
     endfor
 endfunction
 call InitializeDirectories()
-
