@@ -2,7 +2,7 @@
     name = yushijun
     email = yushijun110@126.com
 [core]
-    editor = vim
+    editor = nvim
     quotepath = false
 [branch]
     autosetuprebase = always
