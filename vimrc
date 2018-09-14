@@ -18,8 +18,10 @@ if dein#load_state('~/.cache/dein')
     call dein#add('spf13/vim-colors')
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-repeat')
+    "call dein#add('Shougo/denite.nvim')
     call dein#add('ctrlpvim/ctrlp.vim')
-    call dein#add('tacahiroy/ctrlp-funky')
+    call dein#add('Yggdroot/LeaderF')
+    "call dein#add('dyng/ctrlsf.vim')
     call dein#add('terryma/vim-multiple-cursors')
     call dein#add('vim-airline/vim-airline')
     call dein#add('vim-airline/vim-airline-themes')
@@ -139,7 +141,7 @@ if has('persistent_undo')
 endif
 
 "============= UI ==============
-if filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+if dein#tap('vim-colors-solarized')
     colorscheme solarized             " Load a colorscheme
 endif
   
@@ -300,8 +302,80 @@ augroup END
 
 "========== PLUGIN ============
 
+" denite
+if dein#tap('denite.nvim')
+" denite option
+    let s:denite_options = {
+          \ 'default' : {
+          \ 'winheight' : 15,
+          \ 'mode' : 'insert',
+          \ 'quit' : 1,
+          \ 'highlight_matched_char' : 'MoreMsg',
+          \ 'highlight_matched_range' : 'MoreMsg',
+          \ 'direction': 'rightbelow',
+          \ 'statusline' : has('patch-7.4.1154') ? v:false : 0,
+          \ 'prompt' : '➭',
+          \ }}
+
+    function! s:profile(opts) abort
+        for fname in keys(a:opts)
+            for dopt in keys(a:opts[fname])
+                call denite#custom#option(fname, dopt, a:opts[fname][dopt])
+            endfor
+        endfor
+    endfunction
+    call s:profile(s:denite_options)
+
+    call denite#custom#var(
+      \ 'buffer',
+      \ 'date_format', '%m-%d-%Y %H:%M:%S')
+    
+    " KEY MAPPINGS
+    let s:insert_mode_mappings = [
+      \ ['jk', '<denite:enter_mode:normal>', 'noremap'],
+      \ ['<Tab>', '<denite:move_to_next_line>', 'noremap'],
+      \ ['<C-j>', '<denite:move_to_next_line>', 'noremap'],
+      \ ['<S-tab>', '<denite:move_to_previous_line>', 'noremap'],
+      \ ['<C-k>', '<denite:move_to_previous_line>', 'noremap'],
+      \ ['<C-t>', '<denite:do_action:tabopen>', 'noremap'],
+      \ ['<C-v>', '<denite:do_action:vsplit>', 'noremap'],
+      \ ['<C-s>', '<denite:do_action:split>', 'noremap'],
+      \ ['<Esc>', '<denite:enter_mode:normal>', 'noremap'],
+      \ ['<C-N>', '<denite:assign_next_matched_text>', 'noremap'],
+      \ ['<C-P>', '<denite:assign_previous_matched_text>', 'noremap'],
+      \ ['<Up>', '<denite:assign_previous_text>', 'noremap'],
+      \ ['<Down>', '<denite:assign_next_text>', 'noremap'],
+      \ ['<C-Y>', '<denite:redraw>', 'noremap'],
+      \ ]
+
+    let s:normal_mode_mappings = [
+      \ ["'", '<denite:toggle_select_down>', 'noremap'],
+      \ ['<C-n>', '<denite:jump_to_next_source>', 'noremap'],
+      \ ['<C-p>', '<denite:jump_to_previous_source>', 'noremap'],
+      \ ['<Tab>', '<denite:move_to_next_line>', 'noremap'],
+      \ ['<C-j>', '<denite:move_to_next_line>', 'noremap'],
+      \ ['<S-tab>', '<denite:move_to_previous_line>', 'noremap'],
+      \ ['<C-k>', '<denite:move_to_previous_line>', 'noremap'],
+      \ ['gg', '<denite:move_to_first_line>', 'noremap'],
+      \ ['<C-t>', '<denite:do_action:tabopen>', 'noremap'],
+      \ ['<C-v>', '<denite:do_action:vsplit>', 'noremap'],
+      \ ['<C-s>', '<denite:do_action:split>', 'noremap'],
+      \ ['q', '<denite:quit>', 'noremap'],
+      \ ['r', '<denite:redraw>', 'noremap'],
+      \ ]
+
+    for s:m in s:insert_mode_mappings
+        call denite#custom#map('insert', s:m[0], s:m[1], s:m[2])
+    endfor
+    for s:m in s:normal_mode_mappings
+        call denite#custom#map('normal', s:m[0], s:m[1], s:m[2])
+    endfor
+
+    unlet s:m s:insert_mode_mappings s:normal_mode_mappings
+endif
+
 " Language server
-if isdirectory(expand("~/.vim/bundle/LanguageClient-neovim"))
+if dein#tap('LanguageClient-neovim')
     " Required for operations modifying multiple buffers like rename.
     set hidden
 
@@ -327,17 +401,17 @@ if isdirectory(expand("~/.vim/bundle/LanguageClient-neovim"))
 endif
 
 " echodoc
-if isdirectory(expand("~/.vim/bundle/echodoc.vim"))
+if dein#tap('echodoc.vim')
     let g:echodoc#enable_at_startup=1
 endif
 
 " syntastic
-if isdirectory(expand("~/.vim/bundle/syntastic"))
+if dein#tap('syntastic')
     let g:syntastic_python_checkers = ['pyflakes']
 endif
 
 " deoplete
-if isdirectory(expand("~/.vim/bundle/deoplete.nvim"))
+if dein#tap('deoplete.nvim')
     let g:deoplete#enable_at_startup = 1
 
     " SuperTab like snippets' behavior.
@@ -352,7 +426,7 @@ if isdirectory(expand("~/.vim/bundle/deoplete.nvim"))
 endif
 
 " vim-go
-if isdirectory(expand("~/.vim/bundle/vim-go"))
+if dein#tap('vim-go')
     let g:go_highlight_functions = 1
     let g:go_highlight_methods = 1
     let g:go_highlight_structs = 1
@@ -383,7 +457,7 @@ if executable('ctags')
 endif
 
 " nerdtree
-if isdirectory(expand("~/.vim/bundle/nerdtree"))
+if dein#tap('nerdtree')
     map <C-e> <plug>NERDTreeTabsToggle<CR>
     map <leader>e :NERDTreeFind<CR>
     nmap <leader>nt :NERDTreeFind<CR>
@@ -400,7 +474,7 @@ endif
 
 
 " tabular
-if isdirectory(expand("~/.vim/bundle/tabular"))
+if dein#tap('tabular')
     nmap <Leader>a& :Tabularize /&<CR>
     vmap <Leader>a& :Tabularize /&<CR>
     nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
@@ -420,7 +494,7 @@ if isdirectory(expand("~/.vim/bundle/tabular"))
 endif
 
 " pymode
-if isdirectory(expand("~/.vim/bundle/python-mode"))
+if dein#tap('python-mode')
     let g:pymode_lint_checkers = ['pyflakes']
     let g:pymode_trim_whitespaces = 0
     "let g:pymode_options = 0
@@ -431,7 +505,7 @@ if isdirectory(expand("~/.vim/bundle/python-mode"))
 endif
 
 " ctrl p
-if isdirectory(expand("~/.vim/bundle/ctrlp.vim/"))
+if dein#tap('ctrlp.vim')
     let g:ctrlp_working_path_mode = 'ra'
     nnoremap <silent> <D-t> :CtrlP<CR>
     nnoremap <silent> <D-r> :CtrlPMRU<CR>
@@ -456,21 +530,14 @@ if isdirectory(expand("~/.vim/bundle/ctrlp.vim/"))
         \ 'fallback': s:ctrlp_fallback
     \ }
 
-    if isdirectory(expand("~/.vim/bundle/ctrlp-funky/"))
-        " CtrlP extensions
-        let g:ctrlp_extensions = ['funky']
-
-        "funky
-        nnoremap <Leader>fu :CtrlPFunky<Cr>
-    endif
 endif
 
 " tagbar
-if isdirectory(expand("~/.vim/bundle/tagbar/"))
+if dein#tap('tagbar')
     nnoremap <silent> <leader>tt :TagbarToggle<CR>
 endif
 
-if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
+if dein#tap('vim-fugitive')
     nnoremap <silent> <leader>gs :Gstatus<CR>
     nnoremap <silent> <leader>gd :Gdiff<CR>
     nnoremap <silent> <leader>gc :Gcommit<CR>
@@ -486,7 +553,7 @@ if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
 endif
 
 " neocomplete
-if isdirectory(expand("~/.vim/bundle/neocomplete.vim/"))
+if dein#tap('neovimplete.vim')
     let g:acp_enableAtStartup = 0
     let g:neocomplete#enable_at_startup = 1
     let g:neocomplete#enable_smart_case = 1
@@ -560,7 +627,7 @@ endif
 
 " snippet
 
-if isdirectory(expand("~/.vim/bundle/neosnippet/"))
+if dein#tap('neosnippet')
 
     imap <C-k> <Plug>(neosnippet_expand_or_jump)
     smap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -590,21 +657,21 @@ if isdirectory(expand("~/.vim/bundle/neosnippet/"))
 endif
 
 " undotree
-if isdirectory(expand("~/.vim/bundle/undotree/"))
+if dein#tap('undotree')
     nnoremap <Leader>u :UndotreeToggle<CR>
     " If undotree is opened, it is likely one wants to interact with it.
     let g:undotree_SetFocusWhenToggle=1
 endif
 
 " indent
-if isdirectory(expand("~/.vim/bundle/vim-indent-guides/"))
+if dein#tap('vim-indent-guides')
     let g:indent_guides_start_level = 2
     let g:indent_guides_guide_size = 1
     let g:indent_guides_enable_on_vim_startup = 1
 endif
 
 " airline
-if isdirectory(expand("~/.vim/bundle/vim-airline-themes/"))
+if dein#tap('vim-airline-themes')
     if !exists('g:airline_theme')
         let g:airline_theme = 'solarized'
     endif
@@ -618,7 +685,7 @@ if isdirectory(expand("~/.vim/bundle/vim-airline-themes/"))
 endif
 
 " jedi
-if isdirectory(expand("~/.vim/bundle/jedi-vim/"))
+if dein#tap('jedi-vim')
     let g:jedi#force_py_version = 3
     autocmd FileType python setlocal omnifunc=jedi#completions
     "autocmd FileType python setlocal completeopt-=preview
@@ -633,7 +700,7 @@ if isdirectory(expand("~/.vim/bundle/jedi-vim/"))
 endif
 
 " youcompleteme
-if isdirectory(expand("~/.vim/bundle/YouCompleteMe/"))
+if dein#tap('YouCompleteMe')
     let g:acp_enableAtStartup = 0
 
     let g:ycm_python_binary_path = 'python'
@@ -663,7 +730,7 @@ if isdirectory(expand("~/.vim/bundle/YouCompleteMe/"))
     nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 endif
 
-if isdirectory(expand("~/.vim/bundle/vim-markdown-preview/"))
+if dein#tap('vim-markdown-preview')
     let vim_markdown_preview_toggle=0
     let vim_markdown_preview_github=1
     let vim_markdown_preview_hotkey='<leader>md'
