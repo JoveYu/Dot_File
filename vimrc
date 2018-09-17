@@ -43,29 +43,25 @@ if dein#load_state('~/.cache/dein')
 
     " COMPLETE
     call dein#add('Shougo/deoplete.nvim')
-    "call dein#add('zchee/deoplete-jedi')
-    "call dein#add('zchee/deoplete-go')
+    call dein#add('zchee/deoplete-jedi')
+    call dein#add('zchee/deoplete-go')
+    call dein#add('Shougo/neco-syntax')
+    call dein#add('Shougo/neco-vim')
     call dein#add('Shougo/echodoc.vim')
-    "call dein#add('Shougo/neocomplete.vim.git')
     call dein#add('Shougo/neosnippet')
     "call dein#add('Shougo/neosnippet-snippets')
     "call dein#add('Valloric/YouCompleteMe')
     "call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
-    call dein#add('Shougo/neco-syntax')
-    call dein#add('Shougo/neco-vim')
-    call dein#add('autozimu/LanguageClient-neovim')
+    "call dein#add('autozimu/LanguageClient-neovim')
     if !has('nvim') " vim8 dep
         call dein#add('roxma/nvim-yarp')
         call dein#add('roxma/vim-hug-neovim-rpc')
     endif
 
     " PYTHON
-    " call dein#add('klen/python-mode')
-    call dein#add('yssource/python.vim')
-    call dein#add('vim-scripts/python_match.vim')
-    call dein#add('vim-scripts/pythoncomplete')
-    "call dein#add('davidhalter/jedi-vim')
+    call dein#add('Vimjas/vim-python-pep8-indent')
+    call dein#add('davidhalter/jedi-vim')
 
     " JS
     call dein#add('elzr/vim-json')
@@ -74,7 +70,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('kchmck/vim-coffee-script')
     call dein#add('posva/vim-vue')
     call dein#add('digitaltoad/vim-pug')
-    "call dein#add('ternjs/tern_for_vim')
+    call dein#add('carlitux/deoplete-ternjs')
 
     " HTML
     "call dein#add('amirh/HTML-AutoCloseTag')
@@ -111,6 +107,7 @@ filetype plugin indent on   " Automatically detect file types.
 syntax on                   " Syntax highlighting
 set mouse=a                 " Automatically enable mouse usage
 set mousehide               " Hide the mouse cursor while typing
+set encoding=utf-8
 scriptencoding utf-8
 
 if has('clipboard')
@@ -184,8 +181,9 @@ set nofoldenable                  " Auto fold code
 set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
-set completeopt=menu,preview,longest
-set pumheight=10
+"set completeopt=menu,preview,longest
+set completeopt=menu,longest
+"set pumheight=10
 set previewheight=5
 
 
@@ -203,11 +201,12 @@ set splitbelow                  " Puts new split windows to the bottom of the cu
 "set matchpairs+=<:>             " Match, to be used with %
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
-autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql autocmd BufWritePre <buffer> call StripTrailingWhitespace() 
+autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql,vim autocmd BufWritePre <buffer> call StripTrailingWhitespace() 
 "autocmd FileType go autocmd BufWritePre <buffer> Fmt
 autocmd FileType vue,javascript,scss,css,html,haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
 autocmd FileType vue syntax sync fromstart
 autocmd FileType crontab setlocal nobackup nowritebackup
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 " ============ KEY MAP ==============
 let mapleader = ','
@@ -401,8 +400,8 @@ if dein#tap('LanguageClient-neovim')
         \ }
     " Or map each action separately
     nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> rn :call LanguageClient#textDocument_rename()<CR>
+    nnoremap <silent> <leader>g :call LanguageClient#textDocument_definition()<CR>
+    nnoremap <silent> <leader>rn :call LanguageClient#textDocument_rename()<CR>
 
 endif
 
@@ -497,17 +496,6 @@ if dein#tap('tabular')
     vmap <Leader>a,, :Tabularize /,\zs<CR>
     nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
     vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-endif
-
-" pymode
-if dein#tap('python-mode')
-    let g:pymode_lint_checkers = ['pyflakes']
-    let g:pymode_trim_whitespaces = 0
-    "let g:pymode_options = 0
-    let g:pymode_rope = 0
-    let g:pymode_lint = 0
-    let g:pymode_folding = 0
-    let g:pymode_run_bind = '<TAB>'
 endif
 
 " ctrl p
@@ -678,31 +666,16 @@ endif
 
 " airline
 if dein#tap('vim-airline-themes')
-    if !exists('g:airline_theme')
-        let g:airline_theme = 'solarized'
-    endif
-    if !exists('g:airline_powerline_fonts')
-        " Use the default set of separators with a few customizations
-        "let g:airline_left_sep='›'  " Slightly fancier than '>'
-        "let g:airline_right_sep='‹' " Slightly fancier than '<'
-        let g:airline_left_sep='>'
-        let g:airline_right_sep='<'
-    endif
+    let g:airline_theme = 'solarized'
 endif
 
 " jedi
 if dein#tap('jedi-vim')
-    let g:jedi#force_py_version = 3
     autocmd FileType python setlocal omnifunc=jedi#completions
-    "autocmd FileType python setlocal completeopt-=preview
+    let g:jedi#force_py_version = 3
     let g:jedi#completions_enabled = 0
     let g:jedi#auto_vim_configuration = 0
     let g:jedi#use_tabs_not_buffers = 1
-    " if !exists('g:neocomplete#force_omni_input_patterns')
-    "     let g:neocomplete#force_omni_input_patterns = {}
-    " endif
-    " let g:neocomplete#force_omni_input_patterns.python =
-    " \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
 endif
 
 " youcompleteme
