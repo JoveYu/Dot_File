@@ -14,8 +14,9 @@ if dein#load_state('~/.cache/dein')
 
     call dein#add('VundleVim/Vundle.vim')
     call dein#add('scrooloose/nerdtree')
+    call dein#add('Xuyuanp/nerdtree-git-plugin')
     call dein#add('altercation/vim-colors-solarized')
-    call dein#add('spf13/vim-colors')
+    call dein#add('rafi/awesome-vim-colorschemes')
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-repeat')
     "call dein#add('Shougo/denite.nvim')
@@ -60,6 +61,7 @@ if dein#load_state('~/.cache/dein')
     endif
 
     " PYTHON
+    call dein#add('vim-python/python-syntax')
     call dein#add('Vimjas/vim-python-pep8-indent')
     call dein#add('davidhalter/jedi-vim')
 
@@ -72,13 +74,15 @@ if dein#load_state('~/.cache/dein')
     call dein#add('digitaltoad/vim-pug')
     call dein#add('carlitux/deoplete-ternjs')
 
+    " LUA
+    call dein#add('tbastos/vim-lua')
+
     " HTML
-    "call dein#add('amirh/HTML-AutoCloseTag')
-    "call dein#add('gorodinskiy/vim-coloresque')
     call dein#add('mattn/emmet-vim')
-    "call dein#add('Valloric/MatchTagAlways')
+    call dein#add('othree/html5.vim')
 
     " CSS
+    call dein#add('othree/csscomplete.vim')
     call dein#add('hail2u/vim-css3-syntax')
     call dein#add('groenewege/vim-less')
     call dein#add('tpope/vim-haml')
@@ -140,7 +144,7 @@ endif
 if dein#tap('vim-colors-solarized')
     colorscheme solarized             " Load a colorscheme
 endif
-  
+
 set guifont=Monaco:h14
 set tabpagemax=15               " Only show 15 tabs
 set noshowmode                    " Display the current mode
@@ -201,12 +205,12 @@ set splitbelow                  " Puts new split windows to the bottom of the cu
 "set matchpairs+=<:>             " Match, to be used with %
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
-autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql,vim autocmd BufWritePre <buffer> call StripTrailingWhitespace() 
+autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql,vim autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 "autocmd FileType go autocmd BufWritePre <buffer> Fmt
 autocmd FileType vue,javascript,scss,css,html,haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
 autocmd FileType vue syntax sync fromstart
 autocmd FileType crontab setlocal nobackup nowritebackup
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.pug.javascript.css
 
 " ============ KEY MAP ==============
 let mapleader = ','
@@ -330,7 +334,7 @@ if dein#tap('denite.nvim')
     call denite#custom#var(
       \ 'buffer',
       \ 'date_format', '%m-%d-%Y %H:%M:%S')
-    
+
     " KEY MAPPINGS
     let s:insert_mode_mappings = [
       \ ['jk', '<denite:enter_mode:normal>', 'noremap'],
@@ -729,7 +733,7 @@ function! StripTrailingWhitespace()
     call cursor(l, c)
 endfunction
 
-" Shell command 
+" Shell command
 function! s:RunShellCommand(cmdline)
     botright new
 
