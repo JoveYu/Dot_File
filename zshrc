@@ -19,6 +19,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 #alias
+alias pxy='proxychains4'
 alias vim='nvim'
 alias cnpm="npm --registry=https://registry.npm.taobao.org \
 --cache=$HOME/.npm/.cache/cnpm \

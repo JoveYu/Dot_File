@@ -1,6 +1,6 @@
 " vim config for jove
 
-"============ VUNDLE ==================
+"============ Plugin ==================
 if &compatible
     set nocompatible
 endif
@@ -12,7 +12,6 @@ if dein#load_state('~/.cache/dein')
 
     call dein#add('~/.cache/dein')
 
-    call dein#add('VundleVim/Vundle.vim')
     call dein#add('scrooloose/nerdtree')
     call dein#add('Xuyuanp/nerdtree-git-plugin')
     call dein#add('altercation/vim-colors-solarized')
@@ -41,11 +40,13 @@ if dein#load_state('~/.cache/dein')
     call dein#add('tpope/vim-commentary')
     call dein#add('godlygeek/tabular')
     call dein#add('majutsushi/tagbar')
+    call dein#add('sheerun/vim-polyglot')
 
     " COMPLETE
     call dein#add('Shougo/deoplete.nvim')
     call dein#add('zchee/deoplete-jedi')
-    call dein#add('zchee/deoplete-go')
+    call dein#add('zchee/deoplete-go', {'build': 'make'})
+    call dein#add('Shougo/deoplete-clangx')
     call dein#add('Shougo/neco-syntax')
     call dein#add('Shougo/neco-vim')
     call dein#add('Shougo/echodoc.vim')
@@ -61,7 +62,6 @@ if dein#load_state('~/.cache/dein')
     endif
 
     " PYTHON
-    call dein#add('vim-python/python-syntax')
     call dein#add('Vimjas/vim-python-pep8-indent')
     call dein#add('davidhalter/jedi-vim')
 
@@ -83,16 +83,11 @@ if dein#load_state('~/.cache/dein')
 
     " CSS
     call dein#add('othree/csscomplete.vim')
-    call dein#add('hail2u/vim-css3-syntax')
     call dein#add('groenewege/vim-less')
     call dein#add('tpope/vim-haml')
-    call dein#add('cakebaker/scss-syntax.vim')
 
     " GO
     "call dein#add('fatih/vim-go')
-
-    " THRIFT
-    call dein#add('solarnz/thrift.vim')
 
     " MARKDOWN
     call dein#add('plasticboy/vim-markdown')
@@ -306,6 +301,11 @@ augroup END
 
 
 "========== PLUGIN ============
+
+if dein#tap('vim-python/python-syntax')
+    let g:python_highlight_all = 1
+endif
+
 
 " denite
 if dein#tap('denite.nvim')
