@@ -302,8 +302,16 @@ augroup END
 
 "========== PLUGIN ============
 
-if dein#tap('vim-python/python-syntax')
-    let g:python_highlight_all = 1
+
+if dein#tap('nerdcommenter')
+    let g:NERDSpaceDelims = 1
+    let g:NERDRemoveExtraSpaces = 1
+    let g:NERDCompactSexyComs = 1
+    let g:NERDDefaultAlign = 'left'
+    let g:NERDCommentEmptyLines = 1
+    let g:NERDTrimTrailingWhitespace = 1
+    let g:NERD_c_alt_style = 1
+    let g:NERDCustomDelimiters = {'c': { 'left': '//', 'leftAlt': '/*', 'rightAlt': '*/' }}
 endif
 
 
