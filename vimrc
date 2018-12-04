@@ -93,6 +93,9 @@ if dein#load_state('~/.cache/dein')
     call dein#add('plasticboy/vim-markdown')
     call dein#add('JamshedVesuna/vim-markdown-preview')
 
+    " OTHER
+    call dein#add('vim-scripts/scons.vim')
+
     call dein#end()
     call dein#save_state()
 endif
@@ -206,6 +209,7 @@ autocmd FileType vue,javascript,scss,css,html,haskell,puppet,ruby,yml setlocal e
 autocmd FileType vue syntax sync fromstart
 autocmd FileType crontab setlocal nobackup nowritebackup
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.pug.javascript.css
+autocmd BufRead,BufNewFile SCons* setlocal filetype=scons
 
 " ============ KEY MAP ==============
 let mapleader = ','
