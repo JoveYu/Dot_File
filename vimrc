@@ -429,6 +429,7 @@ endif
 " syntastic
 if dein#tap('syntastic')
     let g:syntastic_python_checkers = ['pyflakes']
+    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck', 'gofmt', 'go']
 endif
 
 " deoplete
@@ -545,6 +546,33 @@ endif
 " tagbar
 if dein#tap('tagbar')
     nnoremap <silent> <leader>tt :TagbarToggle<CR>
+    let g:tagbar_type_go = {
+        \ 'ctagstype' : 'go',
+        \ 'kinds'     : [
+            \ 'p:package',
+            \ 'i:imports:1',
+            \ 'c:constants',
+            \ 'v:variables',
+            \ 't:types',
+            \ 'n:interfaces',
+            \ 'w:fields',
+            \ 'e:embedded',
+            \ 'm:methods',
+            \ 'r:constructor',
+            \ 'f:functions'
+        \ ],
+        \ 'sro' : '.',
+        \ 'kind2scope' : {
+            \ 't' : 'ctype',
+            \ 'n' : 'ntype'
+        \ },
+        \ 'scope2kind' : {
+            \ 'ctype' : 't',
+            \ 'ntype' : 'n'
+        \ },
+        \ 'ctagsbin'  : 'gotags',
+        \ 'ctagsargs' : '-sort -silent'
+    \ }
 endif
 
 if dein#tap('vim-fugitive')

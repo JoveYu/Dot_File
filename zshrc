@@ -28,14 +28,15 @@ alias cnpm="npm --registry=https://registry.npm.taobao.org \
 
 # export
 export NVM_DIR="$HOME/.nvm"
-export GOPATH="$HOME/.go_path"
+export GOPATH="$HOME/.gopath"
 export PATH=$PATH:$HOME/.npm/bin/:$GOPATH/bin/
 export EDITOR="nvim"
 export TERM=xterm-256color
-#export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
+# export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
 export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
 export SASS_BINARY_SITE=http://npm.taobao.org/mirrors/node-sass
+export PYTHONPATH=$PYTHONPATH:~/work/
 
 # env
 if [ -e ~/work/python3/bin/activate ]
