@@ -14,7 +14,8 @@ if dein#load_state('~/.cache/dein')
 
     call dein#add('scrooloose/nerdtree')
     call dein#add('Xuyuanp/nerdtree-git-plugin')
-    call dein#add('altercation/vim-colors-solarized')
+    " call dein#add('altercation/vim-colors-solarized')
+    call dein#add('icymind/NeoSolarized')
     call dein#add('rafi/awesome-vim-colorschemes')
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-repeat')
@@ -55,7 +56,7 @@ if dein#load_state('~/.cache/dein')
     "call dein#add('Valloric/YouCompleteMe')
     "call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
-    "call dein#add('autozimu/LanguageClient-neovim')
+    " call dein#add('autozimu/LanguageClient-neovim')
     if !has('nvim') " vim8 dep
         call dein#add('roxma/nvim-yarp')
         call dein#add('roxma/vim-hug-neovim-rpc')
@@ -141,6 +142,10 @@ endif
 "============= UI ==============
 if dein#tap('vim-colors-solarized')
     colorscheme solarized             " Load a colorscheme
+endif
+if dein#tap('NeoSolarized')
+    colorscheme NeoSolarized
+    set termguicolors
 endif
 
 set guifont=Monaco:h14
@@ -404,6 +409,7 @@ if dein#tap('LanguageClient-neovim')
     " npm install vscode-html-languageserver-bin -g
     let g:LanguageClient_serverCommands = {
         \ 'python': ['pyls'],
+        \ 'go': ['go-langserver'],
         \ 'vue': ['vls'],
         \ 'sh': ['bash-language-server', 'start'],
         \ 'javascript': ['javascript-typescript-stdio'],
@@ -429,7 +435,7 @@ endif
 " syntastic
 if dein#tap('syntastic')
     let g:syntastic_python_checkers = ['pyflakes']
-    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck', 'gofmt', 'go']
+    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck', 'gofmt']
 endif
 
 " deoplete
