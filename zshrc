@@ -21,7 +21,7 @@ source $ZSH/oh-my-zsh.sh
 #alias
 alias pxy='proxychains4'
 alias vim='nvim'
-alias cnpm="npm --registry=https://registry.npm.taobao.org \
+alias npm="npm --registry=https://registry.npm.taobao.org \
 --cache=$HOME/.npm/.cache/cnpm \
 --disturl=https://npm.taobao.org/dist \
 --userconfig=$HOME/.cnpmrc"
@@ -36,7 +36,7 @@ export TERM=xterm-256color
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
 export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
 export SASS_BINARY_SITE=http://npm.taobao.org/mirrors/node-sass
-export PYTHONPATH=$PYTHONPATH:~/work/
+export PYTHONPATH=~/work/
 
 # env
 if [ -e ~/work/python3/bin/activate ]

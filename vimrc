@@ -14,14 +14,13 @@ if dein#load_state('~/.cache/dein')
 
     call dein#add('scrooloose/nerdtree')
     call dein#add('Xuyuanp/nerdtree-git-plugin')
-    " call dein#add('altercation/vim-colors-solarized')
-    call dein#add('icymind/NeoSolarized')
+    call dein#add('altercation/vim-colors-solarized')
+    " call dein#add('icymind/NeoSolarized')
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-repeat')
     "call dein#add('Shougo/denite.nvim')
     call dein#add('ctrlpvim/ctrlp.vim')
     call dein#add('Yggdroot/LeaderF')
-    "call dein#add('dyng/ctrlsf.vim')
     call dein#add('terryma/vim-multiple-cursors')
     call dein#add('vim-airline/vim-airline')
     call dein#add('vim-airline/vim-airline-themes')
@@ -29,6 +28,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('jistr/vim-nerdtree-tabs')
     call dein#add('mbbill/undotree')
     call dein#add('nathanaelkane/vim-indent-guides')
+    " call dein#add('Yggdroot/indentLine')
     call dein#add('mhinz/vim-signify')
     call dein#add('tpope/vim-abolish.git')
     call dein#add('rhysd/conflict-marker.vim')
@@ -755,6 +755,9 @@ if dein#tap('YouCompleteMe')
     set completeopt-=preview
 
     nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+endif
+if dein#tap('vim-markdown')
+    let g:vim_markdown_conceal = 0
 endif
 
 if dein#tap('vim-markdown-preview')
