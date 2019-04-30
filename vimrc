@@ -12,6 +12,12 @@ if dein#load_state('~/.cache/dein')
 
     call dein#add('~/.cache/dein')
 
+    " vim 8 dep
+    if !has('nvim')
+        call dein#add('roxma/nvim-yarp')
+        call dein#add('roxma/vim-hug-neovim-rpc')
+    endif
+
     call dein#add('scrooloose/nerdtree')
     call dein#add('Xuyuanp/nerdtree-git-plugin')
     call dein#add('altercation/vim-colors-solarized')
@@ -43,9 +49,12 @@ if dein#load_state('~/.cache/dein')
 
     " COMPLETE
     call dein#add('Shougo/deoplete.nvim')
-    call dein#add('zchee/deoplete-jedi')
-    call dein#add('zchee/deoplete-go', {'build': 'make'})
-    call dein#add('Shougo/deoplete-clangx')
+    call dein#add('deoplete-plugins/deoplete-jedi')
+    call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
+    call dein#add('deoplete-plugins/deoplete-clang')
+    call dein#add('deoplete-plugins/deoplete-docker')
+    call dein#add('carlitux/deoplete-ternjs')
+    call dein#add('sebastianmarkow/deoplete-rust')
     call dein#add('Shougo/neco-syntax')
     call dein#add('Shougo/neco-vim')
     call dein#add('Shougo/echodoc.vim')
@@ -55,10 +64,6 @@ if dein#load_state('~/.cache/dein')
     "call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
     " call dein#add('autozimu/LanguageClient-neovim')
-    if !has('nvim') " vim8 dep
-        call dein#add('roxma/nvim-yarp')
-        call dein#add('roxma/vim-hug-neovim-rpc')
-    endif
 
     " PYTHON
     call dein#add('Vimjas/vim-python-pep8-indent')
@@ -71,10 +76,11 @@ if dein#load_state('~/.cache/dein')
     call dein#add('kchmck/vim-coffee-script')
     call dein#add('posva/vim-vue')
     call dein#add('digitaltoad/vim-pug')
-    call dein#add('carlitux/deoplete-ternjs')
 
     " LUA
     call dein#add('tbastos/vim-lua')
+    call dein#add('xolox/vim-lua-ftplugin')
+    call dein#add('xolox/vim-misc')
 
     " HTML
     call dein#add('mattn/emmet-vim')
@@ -86,7 +92,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('tpope/vim-haml')
 
     " GO
-    "call dein#add('fatih/vim-go')
+    call dein#add('fatih/vim-go')
 
     " MARKDOWN
     call dein#add('plasticboy/vim-markdown')
@@ -94,6 +100,11 @@ if dein#load_state('~/.cache/dein')
 
     " OTHER
     call dein#add('vim-scripts/scons.vim')
+
+    " OS
+    if has('mac')
+        call dein#add('rizzatti/dash.vim')
+    endif
 
     call dein#end()
     call dein#save_state()
@@ -206,7 +217,7 @@ set splitbelow                  " Puts new split windows to the bottom of the cu
 "set matchpairs+=<:>             " Match, to be used with %
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
-autocmd FileType c,cpp,java,go,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql,vim autocmd BufWritePre <buffer> call StripTrailingWhitespace()
+autocmd FileType c,cpp,java,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql,vim autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 "autocmd FileType go autocmd BufWritePre <buffer> Fmt
 autocmd FileType vue,javascript,scss,css,html,haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
 autocmd FileType vue syntax sync fromstart
@@ -309,6 +320,12 @@ augroup END
 
 "========== PLUGIN ============
 
+if dein#tap('vim-lua-ftplugin')
+    let g:lua_check_syntax = 0
+    let g:lua_complete_omni = 1
+    let g:lua_complete_dynamic = 0
+    let g:lua_define_completion_mappings = 0
+endif
 
 if dein#tap('nerdcommenter')
     let g:NERDSpaceDelims = 1
@@ -433,7 +450,7 @@ endif
 " syntastic
 if dein#tap('syntastic')
     let g:syntastic_python_checkers = ['pyflakes']
-    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck', 'gofmt']
+    let g:syntastic_go_checkers = ['govet', 'errcheck', 'gofmt']
 endif
 
 " deoplete
@@ -449,6 +466,9 @@ if dein#tap('deoplete.nvim')
     smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
+    let g:deoplete#omni#input_patterns = {}
+    let g:deoplete#omni#input_patterns.lua = '\w+|[^. *\t][.:]\w*'
+
 endif
 
 " vim-go
@@ -458,9 +478,6 @@ if dein#tap('vim-go')
     let g:go_highlight_structs = 1
     let g:go_highlight_operators = 1
     let g:go_highlight_build_constraints = 1
-    let g:go_fmt_command = "goimports"
-    let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-    let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
     au FileType go nmap <Leader>s <Plug>(go-implements)
     au FileType go nmap <Leader>i <Plug>(go-info)
     au FileType go nmap <Leader>e <Plug>(go-rename)
@@ -594,81 +611,8 @@ if dein#tap('vim-fugitive')
     nnoremap <silent> <leader>gg :SignifyToggle<CR>
 endif
 
-" neocomplete
-if dein#tap('neovimplete.vim')
-    let g:acp_enableAtStartup = 0
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#enable_smart_case = 1
-    let g:neocomplete#enable_auto_delimiter = 1
-    let g:neocomplete#max_list = 15
-    let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-    " Define dictionary.
-    let g:neocomplete#sources#dictionary#dictionaries = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-    " Define keyword.
-    if !exists('g:neocomplete#keyword_patterns')
-        let g:neocomplete#keyword_patterns = {}
-    endif
-    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-    " Plugin key-mappings.
-    inoremap <expr><C-g>     neocomplete#undo_completion()
-    inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-    " Recommended key-mappings.
-    " <CR>: close popup and save indent.
-    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-    function! s:my_cr_function()
-        return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-        " For no inserting <CR> key.
-        "return pumvisible() ? "\<C-y>" : "\<CR>"
-    endfunction
-    " <TAB>: completion.
-    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-    " <C-h>, <BS>: close popup and delete backword char.
-    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-    " Close popup by <Space>.
-    "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-    " AutoComplPop like behavior.
-    "let g:neocomplete#enable_auto_select = 1
-
-    " Shell like behavior(not recommended).
-    "set completeopt+=longest
-    "let g:neocomplete#enable_auto_select = 1
-    "let g:neocomplete#disable_auto_complete = 1
-    "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-    " Enable omni completion.
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-    autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-    " Enable heavy omni completion.
-    if !exists('g:neocomplete#sources#omni#input_patterns')
-        let g:neocomplete#sources#omni#input_patterns = {}
-    endif
-    let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-    let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-    let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-    let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-    let g:neocomplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\h\w*\|\h\w*::'
-
-endif
-
 
 " snippet
-
 if dein#tap('neosnippet')
 
     imap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -690,7 +634,7 @@ if dein#tap('neosnippet')
     " Disable the neosnippet preview candidate window
     " When enabled, there can be too much visual noise
     " especially when splits are used.
-    "set completeopt-=preview
+    set completeopt-=preview
 
     " For conceal markers.
     if has('conceal')
@@ -710,6 +654,7 @@ if dein#tap('vim-indent-guides')
     let g:indent_guides_start_level = 2
     let g:indent_guides_guide_size = 1
     let g:indent_guides_enable_on_vim_startup = 1
+    let g:indent_guides_tab_guides = 0
 endif
 
 " airline
@@ -758,6 +703,7 @@ if dein#tap('YouCompleteMe')
 endif
 if dein#tap('vim-markdown')
     let g:vim_markdown_conceal = 0
+    let g:vim_markdown_conceal_code_blocks = 0
 endif
 
 if dein#tap('vim-markdown-preview')

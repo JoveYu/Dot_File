@@ -19,7 +19,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 #alias
-alias pxy='proxychains4'
+# alias pxy='proxychains4'
 alias vim='nvim'
 alias npm="npm --registry=https://registry.npm.taobao.org \
 --cache=$HOME/.npm/.cache/cnpm \
@@ -50,6 +50,17 @@ use_python2() {
 use_python3() {
     deactivate
     source ~/work/python3/bin/activate
+}
+
+# func 
+pxy() {
+    HTTP_PROXY=http://127.0.0.1:1087 \
+    HTTPS_PROXY=http://127.0.0.1:1087 \
+    SOCKS5_PROXY=socks5://127.0.0.1:1080 \
+    http_proxy=http://127.0.0.1:1087 \
+    https_proxy=http://127.0.0.1:1087 \
+    socks5_proxy=socks5://127.0.0.1:1080 \
+    $@
 }
 
 if [ -e ~/.zshrc.local ]
