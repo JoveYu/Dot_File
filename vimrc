@@ -469,6 +469,10 @@ if dein#tap('deoplete.nvim')
     let g:deoplete#omni#input_patterns = {}
     let g:deoplete#omni#input_patterns.lua = '\w+|[^. *\t][.:]\w*'
 
+    call deoplete#custom#var('omni', 'functions', {
+    \ 'lua': 'xolox#lua#omnifunc',
+    \ })
+
 endif
 
 " vim-go
