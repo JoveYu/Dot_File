@@ -21,7 +21,6 @@
     rb = rebase
     s = status
     l = log
-    lp = log -p
-    lo = log --pretty=format:"%h' ':' '%ci' ':' '%cn' ':' '%s" --graph
     p = pull
     t = tag
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'

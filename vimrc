@@ -24,7 +24,7 @@ if dein#load_state('~/.cache/dein')
     " call dein#add('icymind/NeoSolarized')
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-repeat')
-    "call dein#add('Shougo/denite.nvim')
+    " call dein#add('Shougo/denite.nvim')
     call dein#add('ctrlpvim/ctrlp.vim')
     call dein#add('Yggdroot/LeaderF')
     call dein#add('terryma/vim-multiple-cursors')
@@ -45,10 +45,10 @@ if dein#load_state('~/.cache/dein')
     call dein#add('tpope/vim-commentary')
     call dein#add('godlygeek/tabular')
     call dein#add('majutsushi/tagbar')
-    call dein#add('sheerun/vim-polyglot')
 
     " COMPLETE
     call dein#add('Shougo/deoplete.nvim')
+    " call dein#add('ujihisa/neco-look')
     call dein#add('deoplete-plugins/deoplete-jedi')
     call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
     call dein#add('deoplete-plugins/deoplete-clang')
@@ -63,42 +63,30 @@ if dein#load_state('~/.cache/dein')
     "call dein#add('Valloric/YouCompleteMe')
     "call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
+    call dein#add('tbodt/deoplete-tabnine', {'build':'sh install.sh'})
     " call dein#add('autozimu/LanguageClient-neovim')
 
     " PYTHON
-    call dein#add('Vimjas/vim-python-pep8-indent')
     call dein#add('davidhalter/jedi-vim')
 
-    " JS
-    call dein#add('elzr/vim-json')
-    call dein#add('pangloss/vim-javascript')
-    call dein#add('briancollins/vim-jst')
-    call dein#add('kchmck/vim-coffee-script')
-    call dein#add('posva/vim-vue')
-    call dein#add('digitaltoad/vim-pug')
-
     " LUA
-    call dein#add('tbastos/vim-lua')
     call dein#add('xolox/vim-lua-ftplugin')
     call dein#add('xolox/vim-misc')
 
     " HTML
     call dein#add('mattn/emmet-vim')
-    call dein#add('othree/html5.vim')
 
     " CSS
     call dein#add('othree/csscomplete.vim')
-    call dein#add('groenewege/vim-less')
-    call dein#add('tpope/vim-haml')
 
     " GO
     call dein#add('fatih/vim-go')
 
     " MARKDOWN
-    call dein#add('plasticboy/vim-markdown')
     call dein#add('JamshedVesuna/vim-markdown-preview')
 
-    " OTHER
+    " SYNTAX
+    call dein#add('sheerun/vim-polyglot') " many lang syntax
     call dein#add('vim-scripts/scons.vim')
 
     " OS
@@ -219,7 +207,7 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
 autocmd FileType c,cpp,java,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql,vim autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 "autocmd FileType go autocmd BufWritePre <buffer> Fmt
-autocmd FileType vue,javascript,scss,css,html,haskell,puppet,ruby,yml setlocal expandtab shiftwidth=2 softtabstop=2
+autocmd FileType vue,javascript,scss,css,html,haskell,puppet,ruby,yml,lua setlocal expandtab shiftwidth=2 softtabstop=2
 autocmd FileType vue syntax sync fromstart
 autocmd FileType crontab setlocal nobackup nowritebackup
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.pug.javascript.css
@@ -296,7 +284,7 @@ nnoremap <silent> <leader>q gwip
 
 " json
 nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
-let g:vim_json_syntax_conceal = 0
+" let g:vim_json_syntax_conceal = 0
 
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
@@ -317,6 +305,11 @@ augroup resCur
     autocmd BufWinEnter * call ResCur()
 augroup END
 
+augroup TerminalStuff
+  autocmd!
+  autocmd TermOpen * setlocal nonumber norelativenumber
+augroup END
+
 
 "========== PLUGIN ============
 
@@ -325,6 +318,7 @@ if dein#tap('vim-lua-ftplugin')
     let g:lua_complete_omni = 1
     let g:lua_complete_dynamic = 0
     let g:lua_define_completion_mappings = 0
+    " let g:lua_interpreter_path = '/usr/local/opt/openresty/bin/resty'
 endif
 
 if dein#tap('nerdcommenter')
@@ -434,6 +428,7 @@ if dein#tap('LanguageClient-neovim')
         \ 'cpp': ['clangd'],
         \ 'objc': ['clangd'],
         \ 'objcpp': ['clangd'],
+        \ 'lua': ['lua-lsp'],
         \ }
     " Or map each action separately
     nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
@@ -450,7 +445,7 @@ endif
 " syntastic
 if dein#tap('syntastic')
     let g:syntastic_python_checkers = ['pyflakes']
-    let g:syntastic_go_checkers = ['govet', 'errcheck', 'gofmt']
+    let g:syntastic_go_checkers = ['govet', 'gofmt', 'errcheck']
 endif
 
 " deoplete
@@ -469,10 +464,7 @@ if dein#tap('deoplete.nvim')
     let g:deoplete#omni#input_patterns = {}
     let g:deoplete#omni#input_patterns.lua = '\w+|[^. *\t][.:]\w*'
 
-    call deoplete#custom#var('omni', 'functions', {
-    \ 'lua': 'xolox#lua#omnifunc',
-    \ })
-
+    call deoplete#custom#source('tabnine', 'rank', 150)
 endif
 
 " vim-go
@@ -484,13 +476,11 @@ if dein#tap('vim-go')
     let g:go_highlight_build_constraints = 1
     au FileType go nmap <Leader>s <Plug>(go-implements)
     au FileType go nmap <Leader>i <Plug>(go-info)
-    au FileType go nmap <Leader>e <Plug>(go-rename)
+    au FileType go nmap <Leader>rn <Plug>(go-rename)
     au FileType go nmap <leader>r <Plug>(go-run)
     au FileType go nmap <leader>b <Plug>(go-build)
     au FileType go nmap <leader>t <Plug>(go-test)
-    au FileType go nmap <Leader>gd <Plug>(go-doc)
-    au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-    au FileType go nmap <leader>co <Plug>(go-coverage)
+    au FileType go nmap <Leader>d <Plug>(go-doc)
 endif
 
 " ctag
@@ -664,6 +654,10 @@ endif
 " airline
 if dein#tap('vim-airline-themes')
     let g:airline_theme = 'solarized'
+    let g:airline_powerline_fonts=1
+    let g:airline_highlighting_cache = 1
+    " let g:airline_statusline_ontop=1
+    " let g:airline#extensions#tabline#enabled = 1
 endif
 
 " jedi
@@ -705,7 +699,7 @@ if dein#tap('YouCompleteMe')
 
     nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 endif
-if dein#tap('vim-markdown')
+if dein#tap('vim-polyglot')
     let g:vim_markdown_conceal = 0
     let g:vim_markdown_conceal_code_blocks = 0
 endif

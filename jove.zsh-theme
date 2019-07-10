@@ -20,8 +20,8 @@ ZSH_THEME_VIRTUALENV_SUFFIX="]%{$reset_color%}"
 RPS1='%n@%m '
 RPS1+='$(git_prompt_info)'
 RPS1+='$(virtualenv_prompt_info)'
-RPS1+='$(nvm_prompt_info)'
-RPS1+='$(ruby_prompt_info)'
+# RPS1+='$(nvm_prompt_info)'
+# RPS1+='$(ruby_prompt_info)'
 RPS1+='$EPS1'
 
 PROMPT='%{$fg[cyan]%}[%~% ]%(?.%{$fg[green]%}.%{$fg[red]%})%B$%b '
