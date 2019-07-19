@@ -54,7 +54,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('deoplete-plugins/deoplete-clang')
     call dein#add('deoplete-plugins/deoplete-docker')
     call dein#add('carlitux/deoplete-ternjs')
-    call dein#add('sebastianmarkow/deoplete-rust')
+    " call dein#add('sebastianmarkow/deoplete-rust')
     call dein#add('Shougo/neco-syntax')
     call dein#add('Shougo/neco-vim')
     call dein#add('Shougo/echodoc.vim')
@@ -88,6 +88,7 @@ if dein#load_state('~/.cache/dein')
     " SYNTAX
     call dein#add('sheerun/vim-polyglot') " many lang syntax
     call dein#add('vim-scripts/scons.vim')
+    call dein#add('JoveYu/vim-systemtap')
 
     " OS
     if has('mac')
@@ -212,6 +213,7 @@ autocmd FileType vue syntax sync fromstart
 autocmd FileType crontab setlocal nobackup nowritebackup
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.pug.javascript.css
 autocmd BufRead,BufNewFile SCons* setlocal filetype=scons
+autocmd BufRead,BufNewFile *.sxx setlocal filetype=stp
 
 " ============ KEY MAP ==============
 let mapleader = ','
