@@ -5,7 +5,7 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}*"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 # nvm
-ZSH_THEME_NVM_PROMPT_PREFIX="%{$fg[yellow]%}[nvm:"
+ZSH_THEME_NVM_PROMPT_PREFIX="%{$fg[magenta]%}[nvm:"
 ZSH_THEME_NVM_PROMPT_SUFFIX="]%{$reset_color%}"
 
 # rvm
@@ -13,15 +13,25 @@ ZSH_THEME_RVM_PROMPT_PREFIX="%{$fg[red]%}[rvm:"
 ZSH_THEME_RVM_PROMPT_SUFFIX="]%{$reset_color%}"
 
 # virtualenv
-ZSH_THEME_VIRTUALENV_PREFIX="%{$fg[blue]%}[py:"
+ZSH_THEME_VIRTUALENV_PREFIX="%{$fg[yellow]%}[py:"
 ZSH_THEME_VIRTUALENV_SUFFIX="]%{$reset_color%}"
 
+# kube
+KUBE_PS1_SYMBOL_DEFAULT="kube:"
+KUBE_PS1_NS_ENABLE="false"
+KUBE_PS1_DIVIDER=""
+KUBE_PS1_PREFIX="%{$fg[blue]%}["
+KUBE_PS1_SUFFIX="%{$fg[blue]%}]%{$reset_color%}"
+KUBE_PS1_COLOR_CONTEXT="%{$fg[blue]%}"
+
 # Combine it all into a final right-side prompt
-RPS1='%n@%m '
+RPS1=''
+# RPS1+='%n@%m '
 RPS1+='$(git_prompt_info)'
 RPS1+='$(virtualenv_prompt_info)'
 # RPS1+='$(nvm_prompt_info)'
 # RPS1+='$(ruby_prompt_info)'
+RPS1+='$(kube_ps1)'
 RPS1+='$EPS1'
 
 PROMPT='%{$fg[cyan]%}[%~% ]%(?.%{$fg[green]%}.%{$fg[red]%})%B$%b '

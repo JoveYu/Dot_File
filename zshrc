@@ -1,6 +1,6 @@
-# Jove's Zsh Cofingure
-# Web Sites : http://jovesky.com
-# Contact Jove : yushijun110[at]gmail.com
+# Jove's Zsh config
+# Web Sites : http://jove.im
+# Contact Jove : yushijun110[at]126.com.com
 #
 export ZSH=$HOME/.oh-my-zsh
 
@@ -18,6 +18,7 @@ plugins=(
     python
     history
     kubectl
+    kube-ps1
     docker
     zsh-syntax-highlighting
     zsh-autosuggestions
