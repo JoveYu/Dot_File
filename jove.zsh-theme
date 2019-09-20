@@ -18,8 +18,6 @@ ZSH_THEME_VIRTUALENV_SUFFIX="]%{$reset_color%}"
 
 # kube
 KUBE_PS1_SYMBOL_DEFAULT="kube:"
-KUBE_PS1_NS_ENABLE="false"
-KUBE_PS1_DIVIDER=""
 KUBE_PS1_PREFIX="%{$fg[blue]%}["
 KUBE_PS1_SUFFIX="%{$fg[blue]%}]%{$reset_color%}"
 KUBE_PS1_COLOR_CONTEXT="%{$fg[blue]%}"

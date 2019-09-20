@@ -26,6 +26,7 @@ plugins=(
 )
 source $ZSH/oh-my-zsh.sh
 
+
 #alias
 # alias pxy='proxychains4'
 alias luarocks='luarocks --local'
@@ -39,16 +40,17 @@ if [ "$(uname)" = "Darwin" ]; then
 fi
 
 # export
+export GEM_HOME="$HOME/.gem"
 export NVM_DIR="$HOME/.nvm"
 export GOPATH="$HOME/.gopath"
-export PATH=$PATH:$HOME/.npm/bin/:$GOPATH/bin/:$HOME/.luarocks/bin/
+export PATH=$PATH:$HOME/.npm/bin/:$GOPATH/bin/:$HOME/.luarocks/bin/:$GEM_HOME/bin/
 export EDITOR="nvim"
 export TERM=xterm-256color
 # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
 export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
 export SASS_BINARY_SITE=http://npm.taobao.org/mirrors/node-sass
-export PYTHONPATH=~/work/
+# export PYTHONPATH=~/work/
 # eval `luarocks path --bin`
 
 

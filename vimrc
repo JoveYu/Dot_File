@@ -34,7 +34,6 @@ if dein#load_state('~/.cache/dein')
     call dein#add('jistr/vim-nerdtree-tabs')
     call dein#add('mbbill/undotree')
     call dein#add('nathanaelkane/vim-indent-guides')
-    " call dein#add('Yggdroot/indentLine')
     call dein#add('mhinz/vim-signify')
     call dein#add('tpope/vim-abolish.git')
     call dein#add('rhysd/conflict-marker.vim')
@@ -52,16 +51,12 @@ if dein#load_state('~/.cache/dein')
     call dein#add('deoplete-plugins/deoplete-jedi')
     call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
     call dein#add('deoplete-plugins/deoplete-clang')
-    call dein#add('deoplete-plugins/deoplete-docker')
-    call dein#add('carlitux/deoplete-ternjs')
+    " call dein#add('carlitux/deoplete-ternjs')
     " call dein#add('sebastianmarkow/deoplete-rust')
     call dein#add('Shougo/neco-syntax')
     call dein#add('Shougo/neco-vim')
     call dein#add('Shougo/echodoc.vim')
     call dein#add('Shougo/neosnippet')
-    "call dein#add('Shougo/neosnippet-snippets')
-    "call dein#add('Valloric/YouCompleteMe')
-    "call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
     call dein#add('tbodt/deoplete-tabnine', {'build':'sh install.sh'})
     " call dein#add('autozimu/LanguageClient-neovim')
@@ -82,18 +77,20 @@ if dein#load_state('~/.cache/dein')
     " GO
     call dein#add('fatih/vim-go')
 
-    " MARKDOWN
-    call dein#add('JamshedVesuna/vim-markdown-preview')
 
     " SYNTAX
     call dein#add('sheerun/vim-polyglot') " many lang syntax
     call dein#add('vim-scripts/scons.vim')
     call dein#add('JoveYu/vim-systemtap')
+    call dein#add('tenfyzhong/tagbar-proto.vim')
 
     " OS
     if has('mac')
         call dein#add('rizzatti/dash.vim')
     endif
+
+    " OTHER
+    call dein#add('JoveYu/vim-youdao')
 
     call dein#end()
     call dein#save_state()
@@ -209,6 +206,7 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 autocmd FileType c,cpp,java,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql,vim autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 "autocmd FileType go autocmd BufWritePre <buffer> Fmt
 autocmd FileType vue,javascript,scss,css,html,haskell,puppet,ruby,yml,lua setlocal expandtab shiftwidth=2 softtabstop=2
+autocmd FileType go setlocal noexpandtab
 autocmd FileType vue syntax sync fromstart
 autocmd FileType crontab setlocal nobackup nowritebackup
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.pug.javascript.css
@@ -307,13 +305,18 @@ augroup resCur
     autocmd BufWinEnter * call ResCur()
 augroup END
 
-augroup TerminalStuff
-  autocmd!
-  autocmd TermOpen * setlocal nonumber norelativenumber
-augroup END
+if has('nvim')
+    augroup TerminalStuff
+      autocmd!
+      autocmd TermOpen * setlocal nonumber norelativenumber
+    augroup END
+endif
 
 
 "========== PLUGIN ============
+if dein#tap('vim-youdao')
+    nmap F :call SearchWord()<CR>
+endif
 
 if dein#tap('vim-lua-ftplugin')
     let g:lua_check_syntax = 0
@@ -420,7 +423,7 @@ if dein#tap('LanguageClient-neovim')
     " npm install vscode-html-languageserver-bin -g
     let g:LanguageClient_serverCommands = {
         \ 'python': ['pyls'],
-        \ 'go': ['go-langserver'],
+        \ 'go': ['gopls'],
         \ 'vue': ['vls'],
         \ 'sh': ['bash-language-server', 'start'],
         \ 'javascript': ['javascript-typescript-stdio'],
@@ -442,6 +445,7 @@ endif
 " echodoc
 if dein#tap('echodoc.vim')
     let g:echodoc#enable_at_startup=1
+    " let g:echodoc#type = 'virtual'
 endif
 
 " syntastic
@@ -467,6 +471,9 @@ if dein#tap('deoplete.nvim')
     let g:deoplete#omni#input_patterns.lua = '\w+|[^. *\t][.:]\w*'
 
     call deoplete#custom#source('tabnine', 'rank', 150)
+    " call deoplete#custom#option('omni_patterns', {
+    " \ 'go': '[^. *\t]\.\w*',
+    " \})
 endif
 
 " vim-go
@@ -671,46 +678,9 @@ if dein#tap('jedi-vim')
     let g:jedi#use_tabs_not_buffers = 1
 endif
 
-" youcompleteme
-if dein#tap('YouCompleteMe')
-    let g:acp_enableAtStartup = 0
-
-    let g:ycm_python_binary_path = 'python'
-
-    " enable completion from tags
-    let g:ycm_collect_identifiers_from_tags_files = 1
-
-    " remap Ultisnips for compatibility for YCM
-    let g:UltiSnipsExpandTrigger = '<C-k>'
-    let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-    let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-
-    " Enable omni completion.
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-    autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-    autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-    " Disable the neosnippet preview candidate window
-    " When enabled, there can be too much visual noise
-    " especially when splits are used.
-    set completeopt-=preview
-
-    nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-endif
 if dein#tap('vim-polyglot')
     let g:vim_markdown_conceal = 0
     let g:vim_markdown_conceal_code_blocks = 0
-endif
-
-if dein#tap('vim-markdown-preview')
-    let vim_markdown_preview_toggle=0
-    let vim_markdown_preview_github=1
-    let vim_markdown_preview_hotkey='<leader>md'
-    let vim_markdown_preview_browser='Google Chrome'
 endif
 
 "============ FUNCTION =============
