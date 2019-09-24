@@ -17,7 +17,7 @@ if dein#load_state('~/.cache/dein')
         call dein#add('roxma/nvim-yarp')
         call dein#add('roxma/vim-hug-neovim-rpc')
     endif
-
+    " call dein#add('Shougo/defx.nvim')
     call dein#add('scrooloose/nerdtree')
     call dein#add('Xuyuanp/nerdtree-git-plugin')
     " call dein#add('altercation/vim-colors-solarized')
@@ -76,7 +76,6 @@ if dein#load_state('~/.cache/dein')
 
     " GO
     call dein#add('fatih/vim-go')
-
 
     " SYNTAX
     call dein#add('sheerun/vim-polyglot') " many lang syntax
@@ -148,23 +147,6 @@ set tabpagemax=15               " Only show 15 tabs
 set noshowmode                    " Display the current mode
 
 set cursorline                  " Highlight current line
-" if has('cmdline_info')
-"     set ruler                   " Show the ruler
-"     set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
-"     set showcmd                 " Show partial commands in status line and
-" endif
-" if has('statusline')
-"     set laststatus=2
-"
-"     " Broken down into easily includeable segments
-"     set statusline=%<%f\                     " Filename
-"     set statusline+=%w%h%m%r                 " Options
-"     set statusline+=%{fugitive#statusline()} " Git Hotness
-"     set statusline+=\ [%{&ff}/%Y]            " Filetype
-"     set statusline+=\ [%{getcwd()}]          " Current dir
-"     set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-" endif
-
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
 set number                      " Line numbers on
@@ -469,6 +451,10 @@ if dein#tap('deoplete.nvim')
 
     let g:deoplete#omni#input_patterns = {}
     let g:deoplete#omni#input_patterns.lua = '\w+|[^. *\t][.:]\w*'
+    " let g:deoplete#omni#input_patterns.go = '[^. *\t]\.\w*'
+    "
+    " let g:deoplete#sources#go = ['vim-go']
+    " let g:deoplete#sources#go#gocode_binary = '/dev/null'
 
     call deoplete#custom#source('tabnine', 'rank', 150)
     " call deoplete#custom#option('omni_patterns', {
@@ -478,6 +464,7 @@ endif
 
 " vim-go
 if dein#tap('vim-go')
+    let g:go_def_mode = "gopls"
     let g:go_highlight_functions = 1
     let g:go_highlight_methods = 1
     let g:go_highlight_structs = 1

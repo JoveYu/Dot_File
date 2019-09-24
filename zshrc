@@ -40,12 +40,14 @@ if [ "$(uname)" = "Darwin" ]; then
 fi
 
 # export
-export GEM_HOME="$HOME/.gem"
-export NVM_DIR="$HOME/.nvm"
-export GOPATH="$HOME/.gopath"
+export GEM_HOME=$HOME/.gem
+export NVM_DIR=$HOME/.nvm
+export GOPATH=$HOME/.gopath
 export PATH=$PATH:$HOME/.npm/bin/:$GOPATH/bin/:$HOME/.luarocks/bin/:$GEM_HOME/bin/
-export EDITOR="nvim"
+export EDITOR=nvim
 export TERM=xterm-256color
+export GOPROXY=https://goproxy.cn
+# export GOPROXY=https://mirrors.aliyun.com/goproxy/
 # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
 export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
@@ -59,14 +61,6 @@ if [ -e ~/work/python3/bin/activate ]
 then
     source ~/work/python3/bin/activate
 fi
-use_python2() {
-    deactivate
-    source ~/work/python2/bin/activate
-}
-use_python3() {
-    deactivate
-    source ~/work/python3/bin/activate
-}
 
 # func 
 pxy() {
