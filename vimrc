@@ -48,9 +48,9 @@ if dein#load_state('~/.cache/dein')
     " COMPLETE
     call dein#add('Shougo/deoplete.nvim')
     " call dein#add('ujihisa/neco-look')
-    call dein#add('deoplete-plugins/deoplete-jedi')
-    call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
-    call dein#add('deoplete-plugins/deoplete-clang')
+    " call dein#add('deoplete-plugins/deoplete-jedi')
+    " call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
+    " call dein#add('deoplete-plugins/deoplete-clang')
     " call dein#add('carlitux/deoplete-ternjs')
     " call dein#add('sebastianmarkow/deoplete-rust')
     call dein#add('Shougo/neco-syntax')
@@ -59,14 +59,10 @@ if dein#load_state('~/.cache/dein')
     call dein#add('Shougo/neosnippet')
     call dein#add('honza/vim-snippets')
     call dein#add('tbodt/deoplete-tabnine', {'build':'sh install.sh'})
-    " call dein#add('autozimu/LanguageClient-neovim')
+    call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh',})
 
     " PYTHON
     call dein#add('davidhalter/jedi-vim')
-
-    " LUA
-    call dein#add('xolox/vim-lua-ftplugin')
-    call dein#add('xolox/vim-misc')
 
     " HTML
     call dein#add('mattn/emmet-vim')
@@ -82,6 +78,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('vim-scripts/scons.vim')
     call dein#add('JoveYu/vim-systemtap')
     call dein#add('tenfyzhong/tagbar-proto.vim')
+    call dein#add('darfink/vim-plist')
 
     " OS
     if has('mac')
@@ -161,14 +158,14 @@ set wildmode=list:longest,full  " Command <Tab> completion, list matches, then l
 set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=3                 " Minimum lines to keep above and below cursor
-set nofoldenable                  " Auto fold code
+set nofoldenable                " Auto fold code
 set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+set signcolumn=yes              " Always show error check column
 
-"set completeopt=menu,preview,longest
+" set completeopt=menu,preview,longest
 set completeopt=menu,longest
 "set pumheight=10
-set previewheight=5
 
 
 "============== FORMAT ==============
@@ -300,14 +297,6 @@ if dein#tap('vim-youdao')
     nmap F :call SearchWord()<CR>
 endif
 
-if dein#tap('vim-lua-ftplugin')
-    let g:lua_check_syntax = 0
-    let g:lua_complete_omni = 1
-    let g:lua_complete_dynamic = 0
-    let g:lua_define_completion_mappings = 0
-    " let g:lua_interpreter_path = '/usr/local/opt/openresty/bin/resty'
-endif
-
 if dein#tap('nerdcommenter')
     let g:NERDSpaceDelims = 1
     let g:NERDRemoveExtraSpaces = 1
@@ -418,22 +407,40 @@ if dein#tap('LanguageClient-neovim')
         \ 'lua': ['lua-lsp'],
         \ }
     " Or map each action separately
-    nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-    nnoremap <silent> <leader>g :call LanguageClient#textDocument_definition()<CR>
-    nnoremap <silent> <leader>rn :call LanguageClient#textDocument_rename()<CR>
+    nnoremap <leader>ld :call LanguageClient#textDocument_definition({'gotoCmd': 'tabnew'})<CR>
+    nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
+    nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
+    nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
+    nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
+    nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
+    nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
+    nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
+    nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
+    nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
+
+
 
 endif
 
 " echodoc
 if dein#tap('echodoc.vim')
     let g:echodoc#enable_at_startup=1
-    " let g:echodoc#type = 'virtual'
+    let g:echodoc#type = 'floating'
 endif
 
 " syntastic
 if dein#tap('syntastic')
+    " set statusline+=%#warningmsg#
+    " set statusline+=%{SyntasticStatuslineFlag()}
+    " set statusline+=%*
+    "
+    " let g:syntastic_always_populate_loc_list = 1
+    " let g:syntastic_auto_loc_list = 1
+    " let g:syntastic_check_on_open = 0
+    " let g:syntastic_check_on_wq = 0
+
     let g:syntastic_python_checkers = ['pyflakes']
-    let g:syntastic_go_checkers = ['govet', 'gofmt', 'errcheck']
+    let g:syntastic_go_checkers = ['golint', 'govet', 'gofmt', 'errcheck']
 endif
 
 " deoplete
@@ -449,27 +456,21 @@ if dein#tap('deoplete.nvim')
     smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
-    let g:deoplete#omni#input_patterns = {}
-    let g:deoplete#omni#input_patterns.lua = '\w+|[^. *\t][.:]\w*'
-    " let g:deoplete#omni#input_patterns.go = '[^. *\t]\.\w*'
-    "
-    " let g:deoplete#sources#go = ['vim-go']
-    " let g:deoplete#sources#go#gocode_binary = '/dev/null'
-
     call deoplete#custom#source('tabnine', 'rank', 150)
-    " call deoplete#custom#option('omni_patterns', {
-    " \ 'go': '[^. *\t]\.\w*',
-    " \})
+
+    call deoplete#custom#option('refresh_always', v:false)
+
 endif
 
 " vim-go
 if dein#tap('vim-go')
-    let g:go_def_mode = "gopls"
+    " let g:go_def_mode = "gopls"
     let g:go_highlight_functions = 1
     let g:go_highlight_methods = 1
     let g:go_highlight_structs = 1
     let g:go_highlight_operators = 1
     let g:go_highlight_build_constraints = 1
+    let g:go_fmt_fail_silently = 1 " not check syntax
     au FileType go nmap <Leader>s <Plug>(go-implements)
     au FileType go nmap <Leader>i <Plug>(go-info)
     au FileType go nmap <Leader>rn <Plug>(go-rename)
@@ -663,6 +664,8 @@ if dein#tap('jedi-vim')
     let g:jedi#completions_enabled = 0
     let g:jedi#auto_vim_configuration = 0
     let g:jedi#use_tabs_not_buffers = 1
+    let g:jedi#smart_auto_mappings = 0
+    let g:jedi#show_call_signatures = 0
 endif
 
 if dein#tap('vim-polyglot')
@@ -735,9 +738,3 @@ function! InitializeDirectories()
 endfunction
 call InitializeDirectories()
 
-au BufEnter ?* call PreviewHeightWorkAround()
-function! PreviewHeightWorkAround()
-  if &previewwindow
-    exec 'setlocal winheight='.&previewheight
-  endif
-endfunc

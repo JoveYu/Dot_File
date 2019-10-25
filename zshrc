@@ -43,7 +43,8 @@ fi
 export GEM_HOME=$HOME/.gem
 export NVM_DIR=$HOME/.nvm
 export GOPATH=$HOME/.gopath
-export PATH=$PATH:$HOME/.npm/bin/:$GOPATH/bin/:$HOME/.luarocks/bin/:$GEM_HOME/bin/
+export NPM_PACKAGES=${HOME}/.npm
+export PATH=$PATH:$NPM_PACKAGES/bin/:$GOPATH/bin/:$HOME/.luarocks/bin/:$GEM_HOME/bin/
 export EDITOR=nvim
 export TERM=xterm-256color
 export GOPROXY=https://goproxy.cn
@@ -81,3 +82,18 @@ if [ -e ~/.zshrc.local ]
 then
     source  ~/.zshrc.local
 fi
+
+
+# other
+# This speeds up pasting w/ autosuggest
+# https://github.com/zsh-users/zsh-autosuggestions/issues/238
+pasteinit() {
+  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+}
+
+pastefinish() {
+  zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
