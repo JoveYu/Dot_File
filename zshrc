@@ -28,7 +28,7 @@ source $ZSH/oh-my-zsh.sh
 
 
 #alias
-# alias pxy='proxychains4'
+alias typora="open -a typora"
 alias luarocks='luarocks --local'
 alias vim='nvim'
 alias npm="npm --registry=https://registry.npm.taobao.org \
@@ -44,7 +44,9 @@ export GEM_HOME=$HOME/.gem
 export NVM_DIR=$HOME/.nvm
 export GOPATH=$HOME/.gopath
 export NPM_PACKAGES=${HOME}/.npm
+export NODE_PATH=$NPM_PACKAGES/lib/node_modules:$NODE_PATH
 export PATH=$PATH:$NPM_PACKAGES/bin/:$GOPATH/bin/:$HOME/.luarocks/bin/:$GEM_HOME/bin/
+export PATH=$PATH:$HOME/.krew/bin/
 export EDITOR=nvim
 export TERM=xterm-256color
 export GOPROXY=https://goproxy.cn
