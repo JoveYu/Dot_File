@@ -20,7 +20,8 @@ ZSH_THEME_VIRTUALENV_SUFFIX="]%{$reset_color%}"
 KUBE_PS1_SYMBOL_DEFAULT="k8s:"
 KUBE_PS1_PREFIX="%{$fg[blue]%}["
 KUBE_PS1_SUFFIX="%{$fg[blue]%}]%{$reset_color%}"
-KUBE_PS1_COLOR_CONTEXT="%{$fg[blue]%}"
+KUBE_PS1_SEPARATOR=""
+KUBE_PS1_DIVIDER=""
 
 # Combine it all into a final right-side prompt
 RPS1=''
