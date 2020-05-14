@@ -40,13 +40,14 @@ if [ "$(uname)" = "Darwin" ]; then
 fi
 
 # export
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export GEM_HOME=$HOME/.gem
 export NVM_DIR=$HOME/.nvm
 export GOPATH=$HOME/.gopath
 export NPM_PACKAGES=${HOME}/.npm
 export NODE_PATH=$NPM_PACKAGES/lib/node_modules:$NODE_PATH
 export PATH=$PATH:$NPM_PACKAGES/bin/:$GOPATH/bin/:$HOME/.luarocks/bin/:$GEM_HOME/bin/
-export PATH=$PATH:$HOME/.krew/bin/
+export PATH=$PATH:$HOME/.krew/bin
 export EDITOR=nvim
 export TERM=xterm-256color
 # export GOPROXY=https://goproxy.cn
@@ -77,9 +78,6 @@ pxy() {
     $@
 }
 
-mkpwd () {
-    cat /dev/urandom | base64 | tr -dc '0-9a-zA-z=' | fold -w $@ | head -n1
-}
 
 if [ -e ~/.zshrc.local ]
 then
