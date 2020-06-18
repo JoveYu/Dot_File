@@ -20,8 +20,11 @@ if dein#load_state('~/.cache/dein')
     " call dein#add('Shougo/defx.nvim')
     call dein#add('scrooloose/nerdtree')
     call dein#add('Xuyuanp/nerdtree-git-plugin')
-    " call dein#add('altercation/vim-colors-solarized')
-    call dein#add('icymind/NeoSolarized')
+    if has('nvim')
+        call dein#add('icymind/NeoSolarized')
+    else
+        " call dein#add('altercation/vim-colors-solarized')
+    endif
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-repeat')
     " call dein#add('Shougo/denite.nvim')
@@ -48,8 +51,8 @@ if dein#load_state('~/.cache/dein')
     " COMPLETE
     call dein#add('Shougo/deoplete.nvim')
     " call dein#add('ujihisa/neco-look')
-    " call dein#add('deoplete-plugins/deoplete-jedi')
-    " call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
+    call dein#add('deoplete-plugins/deoplete-jedi')
+    call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
     " call dein#add('deoplete-plugins/deoplete-clang')
     " call dein#add('carlitux/deoplete-ternjs')
     " call dein#add('sebastianmarkow/deoplete-rust')
@@ -59,7 +62,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('Shougo/neosnippet')
     call dein#add('honza/vim-snippets')
     call dein#add('tbodt/deoplete-tabnine', {'build':'sh install.sh'})
-    call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh',})
+    " call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh',})
 
     " PYTHON
     call dein#add('davidhalter/jedi-vim')
@@ -456,9 +459,10 @@ if dein#tap('deoplete.nvim')
     smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
      \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
-    call deoplete#custom#source('tabnine', 'rank', 150)
-
-    call deoplete#custom#option('refresh_always', v:false)
+    if has('nvim')
+        call deoplete#custom#source('tabnine', 'rank', 150)
+        call deoplete#custom#option('refresh_always', v:false)
+    endif
 
 endif
 
@@ -659,6 +663,7 @@ endif
 
 " jedi
 if dein#tap('jedi-vim')
+    let g:python3_host_prog = expand('~/work/python3/bin/python')
     autocmd FileType python setlocal omnifunc=jedi#completions
     let g:jedi#force_py_version = 3
     let g:jedi#completions_enabled = 0
