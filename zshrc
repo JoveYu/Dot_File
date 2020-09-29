@@ -56,6 +56,7 @@ export GOPROXY=https://goproxy.cn,direct
 # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles
 # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles
+# export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.cloud.tencent.com/homebrew-bottles
 export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
 export SASS_BINARY_SITE=http://npm.taobao.org/mirrors/node-sass
 # export PYTHONPATH=~/work/
@@ -73,9 +74,11 @@ pxy() {
     HTTP_PROXY=http://127.0.0.1:1087 \
     HTTPS_PROXY=http://127.0.0.1:1087 \
     SOCKS5_PROXY=socks5://127.0.0.1:1080 \
+    ALL_PROXY=socks5://127.0.0.1:1080 \
     http_proxy=http://127.0.0.1:1087 \
     https_proxy=http://127.0.0.1:1087 \
     socks5_proxy=socks5://127.0.0.1:1080 \
+    all_proxy=socks5://127.0.0.1:1080 \
     $@
 }
 

@@ -20,11 +20,6 @@ if dein#load_state('~/.cache/dein')
     " call dein#add('Shougo/defx.nvim')
     call dein#add('scrooloose/nerdtree')
     call dein#add('Xuyuanp/nerdtree-git-plugin')
-    if has('nvim')
-        call dein#add('icymind/NeoSolarized')
-    else
-        " call dein#add('altercation/vim-colors-solarized')
-    endif
     call dein#add('tpope/vim-surround')
     call dein#add('tpope/vim-repeat')
     " call dein#add('Shougo/denite.nvim')
@@ -41,7 +36,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('tpope/vim-abolish.git')
     call dein#add('rhysd/conflict-marker.vim')
     call dein#add('jiangmiao/auto-pairs')
-    call dein#add('scrooloose/syntastic')
+    " call dein#add('scrooloose/syntastic')
     call dein#add('tpope/vim-fugitive')
     call dein#add('scrooloose/nerdcommenter')
     call dein#add('tpope/vim-commentary')
@@ -50,9 +45,11 @@ if dein#load_state('~/.cache/dein')
 
     " COMPLETE
     call dein#add('Shougo/deoplete.nvim')
+    call dein#add('Shougo/deoplete-lsp')
+    call dein#add('neovim/nvim-lspconfig')
     " call dein#add('ujihisa/neco-look')
-    call dein#add('deoplete-plugins/deoplete-jedi')
-    call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
+    " call dein#add('deoplete-plugins/deoplete-jedi')
+    " call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
     " call dein#add('deoplete-plugins/deoplete-clang')
     " call dein#add('carlitux/deoplete-ternjs')
     " call dein#add('sebastianmarkow/deoplete-rust')
@@ -86,6 +83,14 @@ if dein#load_state('~/.cache/dein')
     " OS
     if has('mac')
         call dein#add('rizzatti/dash.vim')
+    endif
+
+    " COLOR
+    call dein#add('joshdick/onedark.vim')
+    if has('nvim')
+        call dein#add('overcache/NeoSolarized')
+    else
+        call dein#add('altercation/vim-colors-solarized')
     endif
 
     " OTHER
@@ -138,8 +143,8 @@ if dein#tap('vim-colors-solarized')
     colorscheme solarized             " Load a colorscheme
 endif
 if dein#tap('NeoSolarized')
-    colorscheme NeoSolarized
     set termguicolors
+    colorscheme NeoSolarized
 endif
 
 set guifont=Monaco:h14
@@ -299,6 +304,19 @@ endif
 if dein#tap('vim-youdao')
     nmap F :call SearchWord()<CR>
 endif
+
+if dein#tap('nvim-lspconfig')
+
+    nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+    nnoremap <silent> gh <cmd>lua vim.lsp.buf.hover()<CR>
+
+:lua << END
+    require'nvim_lsp'.pyls.setup{}
+    require'nvim_lsp'.gopls.setup{}
+END
+
+endif
+
 
 if dein#tap('nerdcommenter')
     let g:NERDSpaceDelims = 1
@@ -461,6 +479,7 @@ if dein#tap('deoplete.nvim')
 
     if has('nvim')
         call deoplete#custom#source('tabnine', 'rank', 150)
+        call deoplete#custom#source('lsp', 'max_menu_width', 100)
         call deoplete#custom#option('refresh_always', v:false)
     endif
 
@@ -468,6 +487,7 @@ endif
 
 " vim-go
 if dein#tap('vim-go')
+    let g:go_fmt_command = "goimports"
     " let g:go_def_mode = "gopls"
     let g:go_highlight_functions = 1
     let g:go_highlight_methods = 1
