@@ -86,7 +86,7 @@ if dein#load_state('~/.cache/dein')
     endif
 
     " COLOR
-    call dein#add('joshdick/onedark.vim')
+    " call dein#add('joshdick/onedark.vim')
     if has('nvim')
         call dein#add('overcache/NeoSolarized')
     else
@@ -145,6 +145,11 @@ endif
 if dein#tap('NeoSolarized')
     set termguicolors
     colorscheme NeoSolarized
+endif
+if dein#tap('onedark.vim')
+    set termguicolors
+    let g:onedark_termcolors=256
+    colorscheme onedark
 endif
 
 set guifont=Monaco:h14
@@ -675,7 +680,7 @@ endif
 " airline
 if dein#tap('vim-airline')
     let g:airline_theme = 'solarized'
-    " let g:airline_powerline_fonts=1
+    let g:airline_powerline_fonts=1
     let g:airline_highlighting_cache = 1
     " let g:airline_statusline_ontop=1
     " let g:airline#extensions#tabline#enabled = 1
