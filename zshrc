@@ -40,6 +40,7 @@ if [ "$(uname)" = "Darwin" ]; then
 fi
 
 # export
+export LANG=zh_CN.UTF-8
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export GEM_HOME=$HOME/.gem
 export NVM_DIR=$HOME/.nvm
