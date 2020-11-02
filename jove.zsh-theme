@@ -25,7 +25,7 @@ KUBE_PS1_DIVIDER=""
 
 # Combine it all into a final right-side prompt
 RPS1=''
-# RPS1+='%n@%m '
+RPS1+='%n@%m '
 RPS1+='$(git_prompt_info)'
 RPS1+='$(virtualenv_prompt_info)'
 # RPS1+='$(nvm_prompt_info)'
