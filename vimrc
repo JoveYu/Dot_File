@@ -45,8 +45,8 @@ if dein#load_state('~/.cache/dein')
 
     " COMPLETE
     call dein#add('Shougo/deoplete.nvim')
-    call dein#add('Shougo/deoplete-lsp')
-    call dein#add('neovim/nvim-lspconfig')
+    " call dein#add('Shougo/deoplete-lsp')
+    " call dein#add('neovim/nvim-lspconfig')
     " call dein#add('ujihisa/neco-look')
     " call dein#add('deoplete-plugins/deoplete-jedi')
     " call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
@@ -99,8 +99,6 @@ if dein#load_state('~/.cache/dein')
     call dein#end()
     call dein#save_state()
 endif
-filetype plugin indent on    " required
-syntax enable
 
 "============ GENERAL ==============
 set t_Co=256
