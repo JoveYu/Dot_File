@@ -45,8 +45,8 @@ if dein#load_state('~/.cache/dein')
 
     " COMPLETE
     call dein#add('Shougo/deoplete.nvim')
-    " call dein#add('Shougo/deoplete-lsp')
-    " call dein#add('neovim/nvim-lspconfig')
+    call dein#add('Shougo/deoplete-lsp')
+    call dein#add('neovim/nvim-lspconfig')
     " call dein#add('ujihisa/neco-look')
     " call dein#add('deoplete-plugins/deoplete-jedi')
     " call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
@@ -88,7 +88,8 @@ if dein#load_state('~/.cache/dein')
     " COLOR
     " call dein#add('joshdick/onedark.vim')
     if has('nvim')
-        call dein#add('overcache/NeoSolarized')
+        " call dein#add('overcache/NeoSolarized')
+        call dein#add('JoveYu/NeoSolarized')
     else
         call dein#add('altercation/vim-colors-solarized')
     endif
