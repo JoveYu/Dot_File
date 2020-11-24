@@ -679,7 +679,7 @@ endif
 " airline
 if dein#tap('vim-airline')
     let g:airline_theme = 'solarized'
-    let g:airline_powerline_fonts=1
+    let g:airline_powerline_fonts=0
     let g:airline_highlighting_cache = 1
     " let g:airline_statusline_ontop=1
     " let g:airline#extensions#tabline#enabled = 1
