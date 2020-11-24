@@ -315,8 +315,8 @@ if dein#tap('nvim-lspconfig')
     nnoremap <silent> gh <cmd>lua vim.lsp.buf.hover()<CR>
 
 :lua << END
-    require'nvim_lsp'.pyls.setup{}
-    require'nvim_lsp'.gopls.setup{}
+    require'lspconfig'.pyls.setup{}
+    require'lspconfig'.gopls.setup{}
 END
 
 endif
