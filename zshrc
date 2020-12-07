@@ -61,14 +61,7 @@ export SASS_BINARY_SITE=http://npm.taobao.org/mirrors/node-sass
 # export PYTHONPATH=~/work/
 # eval `luarocks path --bin`
 
-
-# env
-if [ -e ~/work/python3/bin/activate ]
-then
-    source ~/work/python3/bin/activate
-fi
-
-# func 
+# func
 pxy() {
     HTTP_PROXY=http://127.0.0.1:1087 \
     HTTPS_PROXY=http://127.0.0.1:1087 \
