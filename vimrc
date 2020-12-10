@@ -58,7 +58,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('Shougo/echodoc.vim')
     call dein#add('Shougo/neosnippet')
     call dein#add('honza/vim-snippets')
-    call dein#add('tbodt/deoplete-tabnine', {'build':'sh install.sh'})
+    " call dein#add('tbodt/deoplete-tabnine', {'build':'sh install.sh'})
     " call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh',})
 
     " PYTHON
