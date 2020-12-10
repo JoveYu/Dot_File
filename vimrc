@@ -687,7 +687,6 @@ endif
 
 " jedi
 if dein#tap('jedi-vim')
-    let g:python3_host_prog = expand('~/work/python3/bin/python')
     autocmd FileType python setlocal omnifunc=jedi#completions
     let g:jedi#force_py_version = 3
     let g:jedi#completions_enabled = 0
