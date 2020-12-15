@@ -61,29 +61,12 @@ if dein#load_state('~/.cache/dein')
     " call dein#add('tbodt/deoplete-tabnine', {'build':'sh install.sh'})
     " call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh',})
 
-    " PYTHON
-    call dein#add('davidhalter/jedi-vim')
-
-    " HTML
-    call dein#add('mattn/emmet-vim')
-
-    " CSS
-    call dein#add('othree/csscomplete.vim')
-
-    " GO
-    call dein#add('fatih/vim-go')
-
     " SYNTAX
     call dein#add('sheerun/vim-polyglot') " many lang syntax
     call dein#add('vim-scripts/scons.vim')
     call dein#add('JoveYu/vim-systemtap')
     call dein#add('tenfyzhong/tagbar-proto.vim')
     call dein#add('darfink/vim-plist')
-
-    " OS
-    if has('mac')
-        call dein#add('rizzatti/dash.vim')
-    endif
 
     " COLOR
     " call dein#add('joshdick/onedark.vim')
@@ -678,7 +661,11 @@ endif
 
 " airline
 if dein#tap('vim-airline')
-    let g:airline_theme = 'solarized'
+    if dein#tap('onedark.vim')
+        let g:airline_theme = 'onedark'
+    else
+        let g:airline_theme = 'solarized'
+    endif
     let g:airline_powerline_fonts=0
     let g:airline_highlighting_cache = 1
     " let g:airline_statusline_ontop=1
