@@ -69,10 +69,10 @@ if dein#load_state('~/.cache/dein')
     call dein#add('darfink/vim-plist')
 
     " COLOR
-    " call dein#add('joshdick/onedark.vim')
+    call dein#add('lifepillar/vim-solarized8')
+    call dein#add('joshdick/onedark.vim')
     if has('nvim')
-        " call dein#add('overcache/NeoSolarized')
-        call dein#add('JoveYu/NeoSolarized')
+        call dein#add('overcache/NeoSolarized')
     else
         call dein#add('altercation/vim-colors-solarized')
     endif
@@ -121,18 +121,22 @@ if has('persistent_undo')
 endif
 
 "============= UI ==============
-if dein#tap('vim-colors-solarized')
-    colorscheme solarized             " Load a colorscheme
-endif
+" if dein#tap('vim-solarized8')
+"     set termguicolors
+"     colorscheme solarized8
+" endif
+" if dein#tap('vim-colors-solarized')
+"     colorscheme solarized
+" endif
 if dein#tap('NeoSolarized')
     set termguicolors
     colorscheme NeoSolarized
 endif
-if dein#tap('onedark.vim')
-    set termguicolors
-    let g:onedark_termcolors=256
-    colorscheme onedark
-endif
+" if dein#tap('onedark.vim')
+"     set termguicolors
+"     let g:onedark_termcolors=256
+"     colorscheme onedark
+" endif
 
 set guifont=Monaco:h14
 set tabpagemax=15               " Only show 15 tabs
@@ -661,11 +665,8 @@ endif
 
 " airline
 if dein#tap('vim-airline')
-    if dein#tap('onedark.vim')
-        let g:airline_theme = 'onedark'
-    else
-        let g:airline_theme = 'solarized'
-    endif
+    " let g:airline_theme = 'onedark'
+    let g:airline_theme = 'solarized'
     let g:airline_powerline_fonts=0
     let g:airline_highlighting_cache = 1
     " let g:airline_statusline_ontop=1
