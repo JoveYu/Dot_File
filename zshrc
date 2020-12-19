@@ -63,12 +63,12 @@ export SASS_BINARY_SITE=http://npm.taobao.org/mirrors/node-sass
 
 # func
 pxy() {
-    HTTP_PROXY=http://127.0.0.1:1087 \
-    HTTPS_PROXY=http://127.0.0.1:1087 \
+    # HTTP_PROXY=http://127.0.0.1:1087 \
+    # HTTPS_PROXY=http://127.0.0.1:1087 \
     SOCKS5_PROXY=socks5://127.0.0.1:1080 \
     ALL_PROXY=socks5://127.0.0.1:1080 \
-    http_proxy=http://127.0.0.1:1087 \
-    https_proxy=http://127.0.0.1:1087 \
+    # http_proxy=http://127.0.0.1:1087 \
+    # https_proxy=http://127.0.0.1:1087 \
     socks5_proxy=socks5://127.0.0.1:1080 \
     all_proxy=socks5://127.0.0.1:1080 \
     $@
