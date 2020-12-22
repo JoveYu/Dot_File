@@ -28,8 +28,6 @@ source $ZSH/oh-my-zsh.sh
 
 
 #alias
-alias typora="open -a typora"
-alias luarocks='luarocks --local'
 alias vim='nvim'
 alias npm="npm --registry=https://registry.npm.taobao.org \
 --cache=$HOME/.npm/.cache/cnpm \
