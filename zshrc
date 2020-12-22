@@ -45,10 +45,9 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export GEM_HOME=$HOME/.gem
 export NVM_DIR=$HOME/.nvm
 export GOPATH=$HOME/.gopath
-export NPM_PACKAGES=${HOME}/.npm
-export NODE_PATH=$NPM_PACKAGES/lib/node_modules:$NODE_PATH
-export PATH=$PATH:$NPM_PACKAGES/bin/:$GOPATH/bin/:$HOME/.luarocks/bin/:$GEM_HOME/bin/
-export PATH=$PATH:$HOME/.krew/bin
+export NPM_PACKAGES=$HOME/.npm
+export NODE_PATH=$NPM_PACKAGES/lib/node_modules
+export PATH=$NPM_PACKAGES/bin/:$GOPATH/bin/:$HOME/.krew/bin:$PATH
 export EDITOR=nvim
 export TERM=xterm-256color
 export GO111MODULE=on
@@ -58,8 +57,6 @@ export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bott
 # export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.cloud.tencent.com/homebrew-bottles
 export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
 export SASS_BINARY_SITE=http://npm.taobao.org/mirrors/node-sass
-# export PYTHONPATH=~/work/
-# eval `luarocks path --bin`
 
 # func
 pxy() {
@@ -81,7 +78,8 @@ then
 fi
 
 
-# other
+# remove duplicates path
+typeset -U PATH
 # This speeds up pasting w/ autosuggest
 # https://github.com/zsh-users/zsh-autosuggestions/issues/238
 pasteinit() {
