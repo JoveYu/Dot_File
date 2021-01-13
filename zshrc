@@ -28,18 +28,17 @@ source $ZSH/oh-my-zsh.sh
 
 
 #alias
+alias rm='trash'
 alias vim='nvim'
 alias npm="npm --registry=https://registry.npm.taobao.org \
 --cache=$HOME/.npm/.cache/cnpm \
 --disturl=https://npm.taobao.org/dist \
 --userconfig=$HOME/.cnpmrc"
-if [ "$(uname)" = "Darwin" ]; then
-    alias rm='trash'
-fi
 
 # export
 export LANG=zh_CN.UTF-8
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+export QT_QPA_PLATFORMTHEME=gtk2
 export GEM_HOME=$HOME/.gem
 export NVM_DIR=$HOME/.nvm
 export GOPATH=$HOME/.gopath
