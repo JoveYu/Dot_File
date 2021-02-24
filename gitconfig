@@ -27,3 +27,6 @@
     t = tag
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
     ignore = "!gi() { curl -sL https://www.gitignore.io/api/$@ ;}; gi"
+[url "git@gitee.com:"]
+    insteadOf = https://gitee.com/
+
