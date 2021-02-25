@@ -30,10 +30,6 @@ source $ZSH/oh-my-zsh.sh
 #alias
 alias rm='trash'
 alias vim='nvim'
-alias npm="npm --registry=https://registry.npm.taobao.org \
---cache=$HOME/.npm/.cache/cnpm \
---disturl=https://npm.taobao.org/dist \
---userconfig=$HOME/.cnpmrc"
 
 # export
 export LANG=zh_CN.UTF-8

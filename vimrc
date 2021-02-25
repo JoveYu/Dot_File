@@ -45,8 +45,8 @@ if dein#load_state('~/.cache/dein')
 
     " COMPLETE
     call dein#add('Shougo/deoplete.nvim')
-    call dein#add('Shougo/deoplete-lsp')
-    call dein#add('neovim/nvim-lspconfig')
+    " call dein#add('Shougo/deoplete-lsp')
+    " call dein#add('neovim/nvim-lspconfig')
     " call dein#add('ujihisa/neco-look')
     " call dein#add('deoplete-plugins/deoplete-jedi')
     " call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
@@ -301,10 +301,10 @@ if dein#tap('nvim-lspconfig')
     nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
     nnoremap <silent> gh <cmd>lua vim.lsp.buf.hover()<CR>
 
-:lua << END
-    require'lspconfig'.pyls.setup{}
-    require'lspconfig'.gopls.setup{}
-END
+" :lua << END
+"     require'lspconfig'.pyls.setup{}
+"     require'lspconfig'.gopls.setup{}
+" END
 
 endif
 
