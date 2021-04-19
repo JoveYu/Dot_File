@@ -28,8 +28,12 @@ source $ZSH/oh-my-zsh.sh
 
 
 #alias
-alias rm='trash'
-alias vim='nvim'
+if command -v trash &> /dev/null; then
+    alias rm='trash'
+fi
+if command -v nvim &> /dev/null; then
+    alias vim='nvim'
+fi
 
 # export
 export LANG=zh_CN.UTF-8
