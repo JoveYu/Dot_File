@@ -59,7 +59,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('Shougo/neosnippet')
     call dein#add('honza/vim-snippets')
     " call dein#add('tbodt/deoplete-tabnine', {'build':'sh install.sh'})
-    " call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh',})
+    call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh',})
 
     " SYNTAX
     call dein#add('sheerun/vim-polyglot') " many lang syntax
@@ -267,21 +267,6 @@ nmap <leader>jt <Esc>:%!python -m json.tool<CR><Esc>:set filetype=json<CR>
 " Instead of reverting the cursor to the last position in the buffer, we
 " set it to the first line when editing a git commit message
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-
-" http://vim.wikia.com/wiki/Restore_cursor_to_file_position_in_previous_editing_session
-" Restore cursor to file position in previous editing session
-" To disable this, add the following to your .vimrc.before.local file:
-function! ResCur()
-    if line("'\"") <= line("$")
-        silent! normal! g`"
-        return 1
-    endif
-endfunction
-
-augroup resCur
-    autocmd!
-    autocmd BufWinEnter * call ResCur()
-augroup END
 
 if has('nvim')
     augroup TerminalStuff

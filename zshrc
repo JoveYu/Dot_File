@@ -23,6 +23,7 @@ plugins=(
     zsh-syntax-highlighting
     zsh-autosuggestions
     extract
+    command-not-found
 )
 source $ZSH/oh-my-zsh.sh
 
