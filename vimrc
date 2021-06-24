@@ -45,8 +45,9 @@ if dein#load_state('~/.cache/dein')
 
     " COMPLETE
     call dein#add('Shougo/deoplete.nvim')
-    " call dein#add('Shougo/deoplete-lsp')
-    " call dein#add('neovim/nvim-lspconfig')
+    call dein#add('Shougo/deoplete-lsp')
+    call dein#add('neovim/nvim-lspconfig')
+    call dein#add('kabouzeid/nvim-lspinstall')
     " call dein#add('ujihisa/neco-look')
     " call dein#add('deoplete-plugins/deoplete-jedi')
     " call dein#add('deoplete-plugins/deoplete-go', {'build': 'make'})
@@ -59,7 +60,7 @@ if dein#load_state('~/.cache/dein')
     call dein#add('Shougo/neosnippet')
     call dein#add('honza/vim-snippets')
     " call dein#add('tbodt/deoplete-tabnine', {'build':'sh install.sh'})
-    call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh',})
+    " call dein#add('autozimu/LanguageClient-neovim', {'rev': 'next', 'build': 'bash install.sh',})
 
     " SYNTAX
     call dein#add('sheerun/vim-polyglot') " many lang syntax
@@ -286,10 +287,14 @@ if dein#tap('nvim-lspconfig')
     nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
     nnoremap <silent> gh <cmd>lua vim.lsp.buf.hover()<CR>
 
-" :lua << END
-"     require'lspconfig'.pyls.setup{}
-"     require'lspconfig'.gopls.setup{}
-" END
+lua << EOF
+require'lspinstall'.setup() -- important
+
+local servers = require'lspinstall'.installed_servers()
+for _, server in pairs(servers) do
+  require'lspconfig'[server].setup{}
+end
+EOF
 
 endif
 

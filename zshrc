@@ -22,6 +22,7 @@ plugins=(
     docker
     zsh-syntax-highlighting
     zsh-autosuggestions
+    history-substring-search
     extract
     command-not-found
 )
