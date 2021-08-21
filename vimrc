@@ -70,13 +70,9 @@ if dein#load_state('~/.cache/dein')
     call dein#add('darfink/vim-plist')
 
     " COLOR
-    call dein#add('lifepillar/vim-solarized8')
-    call dein#add('joshdick/onedark.vim')
-    if has('nvim')
-        call dein#add('overcache/NeoSolarized')
-    else
-        call dein#add('altercation/vim-colors-solarized')
-    endif
+    " call dein#add('lifepillar/vim-solarized8')
+    " call dein#add('joshdick/onedark.vim')
+    call dein#add('ishan9299/nvim-solarized-lua')
 
     " OTHER
     call dein#add('JoveYu/vim-youdao')
@@ -122,16 +118,14 @@ if has('persistent_undo')
 endif
 
 "============= UI ==============
-" if dein#tap('vim-solarized8')
-"     set termguicolors
-"     colorscheme solarized8
-" endif
-" if dein#tap('vim-colors-solarized')
-"     colorscheme solarized
-" endif
-if dein#tap('NeoSolarized')
+if dein#tap('vim-solarized8')
     set termguicolors
-    colorscheme NeoSolarized
+    colorscheme solarized8
+endif
+if dein#tap('nvim-solarized-lua')
+    set termguicolors
+    let g:solarized_termtrans=1
+    colorscheme solarized
 endif
 " if dein#tap('onedark.vim')
 "     set termguicolors

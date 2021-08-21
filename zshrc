@@ -36,6 +36,9 @@ fi
 if command -v nvim &> /dev/null; then
     alias vim='nvim'
 fi
+if command -v xdg-open &> /dev/null; then
+    alias open='xdg-open'
+fi
 
 # export
 export LANG=zh_CN.UTF-8
