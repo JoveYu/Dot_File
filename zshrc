@@ -72,6 +72,10 @@ pxy() {
     all_proxy=socks5://127.0.0.1:1080 \
     $@
 }
+unzip-gbk() {
+    LANG=C 7za x $1
+    convmv -f GBK -t utf8 --notest -r .
+}
 
 
 if [ -e ~/.zshrc.local ]
