@@ -76,6 +76,11 @@ unzip-gbk() {
     LANG=C 7za x $1
     convmv -f GBK -t utf8 --notest -r .
 }
+pdf2jpg() {
+    pdf_dir=$(basename $1 .pdf)
+    mkdir $pdf_dir
+    pdftoppm -jpeg "$1" "$pdf_dir/$pdf_dir"
+}
 
 
 if [ -e ~/.zshrc.local ]
