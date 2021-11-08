@@ -25,6 +25,7 @@ plugins=(
     history-substring-search
     extract
     command-not-found
+    dotnet
 )
 source $ZSH/oh-my-zsh.sh
 
