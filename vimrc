@@ -91,13 +91,13 @@ set mousehide               " Hide the mouse cursor while typing
 set encoding=utf-8
 scriptencoding utf-8
 
-if has('clipboard')
-    if has('unnamedplus')  " When possible use + register for copy-paste
-        set clipboard=unnamed,unnamedplus
-    else         " On mac and Windows, use * register for copy-paste
-        set clipboard=unnamed
-    endif
-endif
+" if has('clipboard')
+"     if has('unnamedplus')  " When possible use + register for copy-paste
+"         set clipboard=unnamed,unnamedplus
+"     else         " On mac and Windows, use * register for copy-paste
+"         set clipboard=unnamed
+"     endif
+" endif
 
 "set autowrite                       " Automatically write a file when leaving a modified buffer
 set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
