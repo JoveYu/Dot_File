@@ -14,7 +14,6 @@ plugins=(
     brew
     cp
     autojump
-    osx
     python
     history
     kubectl
