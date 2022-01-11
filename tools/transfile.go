@@ -47,7 +47,7 @@ func FileHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	flag.IntVar(&port, "port", 1234, "set port")
+	flag.IntVar(&port, "port", 80, "set port")
 	flag.StringVar(&base, "path", "/tmp/", "set path")
 	flag.Parse()
 
