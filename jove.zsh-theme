@@ -30,10 +30,7 @@ RPS1+='$(git_prompt_info)'
 RPS1+='$(virtualenv_prompt_info)'
 # RPS1+='$(nvm_prompt_info)'
 # RPS1+='$(ruby_prompt_info)'
-if command -v kubectl &> /dev/null
-then
-    RPS1+='$(kube_ps1)'
-fi
+# RPS1+='$(kube_ps1)'
 RPS1+='$EPS1'
 
 PROMPT='%{$fg[cyan]%}[%~% ]%(?.%{$fg[green]%}.%{$fg[red]%})%B$%b '

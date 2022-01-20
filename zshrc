@@ -17,7 +17,6 @@ plugins=(
     python
     history
     kubectl
-    kube-ps1
     docker
     zsh-syntax-highlighting
     zsh-autosuggestions
