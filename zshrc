@@ -9,7 +9,6 @@ ZSH_THEME="jove"
 plugins=(
     git
     git-flow
-    git-auto-fetch
     virtualenv
     brew
     cp
@@ -57,7 +56,6 @@ export GOPRIVATE="gitee.com/linakesi"
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/bottles
 export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
 export SASS_BINARY_SITE=http://npm.taobao.org/mirrors/node-sass
-export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
 
 # func
 pxy() {
@@ -72,8 +70,9 @@ pxy() {
     $@
 }
 unzip-gbk() {
-    LANG=C 7za x $1
-    convmv -f GBK -t utf8 --notest -r .
+    unzip -O gb2312 $1
+    # LANG=C 7za x $1
+    # convmv -f GBK -t utf8 --notest -r .
 }
 pdf2jpg() {
     pdf_dir=$(basename $1 .pdf)
