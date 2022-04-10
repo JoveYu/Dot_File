@@ -176,7 +176,7 @@ set splitbelow                  " Puts new split windows to the bottom of the cu
 "set matchpairs+=<:>             " Match, to be used with %
 set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
-autocmd FileType c,cpp,java,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql,vim autocmd BufWritePre <buffer> call StripTrailingWhitespace()
+" autocmd FileType c,cpp,java,php,javascript,puppet,python,rust,twig,xml,yml,perl,sql,vim autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 "autocmd FileType go autocmd BufWritePre <buffer> Fmt
 autocmd FileType vue,javascript,scss,css,html,haskell,puppet,ruby,yml,lua setlocal expandtab shiftwidth=2 softtabstop=2
 autocmd FileType go setlocal noexpandtab

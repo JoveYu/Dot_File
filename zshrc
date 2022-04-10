@@ -16,6 +16,7 @@ plugins=(
     python
     history
     kubectl
+    helm
     docker
     zsh-syntax-highlighting
     zsh-autosuggestions
@@ -51,8 +52,6 @@ export EDITOR=nvim
 export TERM=xterm-256color
 export GO111MODULE=on
 export GOPROXY=https://goproxy.cn,direct
-export GOPRIVATE="gitee.com/linakesi"
-#export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.tuna.tsinghua.edu.cn/homebrew-bottles/bottles
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/bottles
 export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
 export SASS_BINARY_SITE=http://npm.taobao.org/mirrors/node-sass
@@ -78,6 +77,15 @@ pdf2jpg() {
     pdf_dir=$(basename $1 .pdf)
     mkdir $pdf_dir
     pdftoppm -jpeg "$1" "$pdf_dir/$pdf_dir"
+}
+gcr-pull() {
+    img=$(echo $1 | sed 's/k8s\.gcr\.io/anjia0532\/google-containers/g;s/gcr\.io/anjia0532/g;s/\//\./g;s/ /\n/g;s/anjia0532\./anjia0532\//g')
+    docker pull $img
+    n=$(echo ${img}| awk -F'[/.:]' '{printf "gcr.io/%s",$2}')
+    image=$(echo ${img}| awk -F'[/.:]' '{printf "/%s",$3}')
+    tag=$(echo ${img}| awk -F'[:]' '{printf ":%s",$2}')
+    docker tag $img "${n}${image}${tag}" && docker image rm $img
+    [[ ${n} == "gcr.io/google-containers" ]] && docker tag "${n}${image}${tag}" "k8s.gcr.io${image}${tag}"
 }
 
 
