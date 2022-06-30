@@ -81,11 +81,8 @@ pdf2jpg() {
 gcr-pull() {
     img=$(echo $1 | sed 's/k8s\.gcr\.io/anjia0532\/google-containers/g;s/gcr\.io/anjia0532/g;s/\//\./g;s/ /\n/g;s/anjia0532\./anjia0532\//g')
     docker pull $img
-    n=$(echo ${img}| awk -F'[/.:]' '{printf "gcr.io/%s",$2}')
-    image=$(echo ${img}| awk -F'[/.:]' '{printf "/%s",$3}')
-    tag=$(echo ${img}| awk -F'[:]' '{printf ":%s",$2}')
-    docker tag $img "${n}${image}${tag}" && docker image rm $img
-    [[ ${n} == "gcr.io/google-containers" ]] && docker tag "${n}${image}${tag}" "k8s.gcr.io${image}${tag}"
+    docker tag $img $1
+    docker image rm $img
 }
 kube-node-shell() {
     node=${1}
