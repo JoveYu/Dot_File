@@ -2,7 +2,7 @@
     name = Jove Yu
     email = yushijun110@126.com
 [core]
-    editor = nvim
+    editor = lvim
     quotepath = false
 [branch]
     autosetuprebase = always
@@ -32,6 +32,6 @@
 [diff]
     tool = nvimdiff
 [difftool "nvimdiff"]
-    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+    cmd = "lvim -d \"$LOCAL\" \"$REMOTE\""
 
 

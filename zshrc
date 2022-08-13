@@ -32,12 +32,13 @@ source $ZSH/oh-my-zsh.sh
 if command -v trash &> /dev/null; then
     alias rm='trash'
 fi
-if command -v nvim &> /dev/null; then
-    alias vim='nvim'
+if command -v lvim &> /dev/null; then
+    alias vim='lvim'
 fi
 if command -v xdg-open &> /dev/null; then
     alias open='xdg-open'
 fi
+alias sudo='sudo '
 
 # export
 export LANG=zh_CN.UTF-8
@@ -48,13 +49,14 @@ export GOPATH=$HOME/.gopath
 export NPM_PACKAGES=$HOME/.npm
 export NODE_PATH=$NPM_PACKAGES/lib/node_modules
 export PATH=$NPM_PACKAGES/bin:$GOPATH/bin:$HOME/.krew/bin:$HOME/.local/bin:$PATH
-export EDITOR=nvim
+export EDITOR=lvim
 export TERM=xterm-256color
 export GO111MODULE=on
 export GOPROXY=https://goproxy.cn,direct
 export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.ustc.edu.cn/homebrew-bottles/bottles
 export NVM_NODEJS_ORG_MIRROR=http://npm.taobao.org/mirrors/node
 export SASS_BINARY_SITE=http://npm.taobao.org/mirrors/node-sass
+eval `dircolors ~/.dir_colors`
 
 # func
 pxy() {
