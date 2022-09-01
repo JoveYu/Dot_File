@@ -17,3 +17,4 @@ lvim.builtin.telescope.defaults.file_ignore_patterns = {
   ".vscode/",
 }
 -- lvim.builtin.cmp.window = {}
+-- lvim.builtin.cmp.formatting.fields = { "abbr", "kind", "menu" }
