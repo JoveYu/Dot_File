@@ -29,15 +29,9 @@ source $ZSH/oh-my-zsh.sh
 
 
 #alias
-if command -v trash &> /dev/null; then
-    alias rm='trash'
-fi
-if command -v lvim &> /dev/null; then
-    alias vim='lvim'
-fi
-if command -v xdg-open &> /dev/null; then
-    alias open='xdg-open'
-fi
+alias rm='trash'
+alias vim='lvim'
+alias open='xdg-open'
 alias sudo='sudo '
 
 # export
