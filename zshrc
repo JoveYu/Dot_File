@@ -74,12 +74,6 @@ pdf2jpg() {
     mkdir $pdf_dir
     pdftoppm -jpeg "$1" "$pdf_dir/$pdf_dir"
 }
-gcr-pull() {
-    img=$(echo $1 | sed 's/k8s\.gcr\.io/anjia0532\/google-containers/g;s/gcr\.io/anjia0532/g;s/\//\./g;s/ /\n/g;s/anjia0532\./anjia0532\//g')
-    docker pull $img
-    docker tag $img $1
-    docker image rm $img
-}
 kube-node-shell() {
     node=${1}
     nodeName=$(kubectl get node ${node} -o template --template='{{index .metadata.labels "kubernetes.io/hostname"}}') 
