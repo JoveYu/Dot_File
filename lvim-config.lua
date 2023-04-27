@@ -1,5 +1,6 @@
 vim.opt.cmdheight = 1
 lvim.plugins = {
+  -- { "h-hg/fcitx.nvim" },
   { "ishan9299/nvim-solarized-lua" },
   -- { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' },
 }
@@ -16,5 +17,5 @@ lvim.builtin.telescope.defaults.file_ignore_patterns = {
   ".idea/",
   ".vscode/",
 }
--- lvim.builtin.cmp.window = {}
--- lvim.builtin.cmp.formatting.fields = { "abbr", "kind", "menu" }
+lvim.builtin.cmp.window = {}
+lvim.builtin.cmp.formatting.fields = { "abbr", "kind", "menu" }

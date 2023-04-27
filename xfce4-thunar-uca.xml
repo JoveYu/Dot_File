@@ -3,9 +3,11 @@
 <action>
 	<icon>utilities-terminal</icon>
 	<name>在此打开终端</name>
+	<submenu></submenu>
 	<unique-id>1636323459768544-1</unique-id>
 	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
 	<description>自定义动作示例</description>
+	<range></range>
 	<patterns>*</patterns>
 	<startup-notify/>
 	<directories/>
@@ -13,27 +15,44 @@
 <action>
 	<icon>visual-studio-code</icon>
 	<name>使用Code打开</name>
+	<submenu></submenu>
 	<unique-id>1636415611530822-1</unique-id>
 	<command>code %f</command>
 	<description></description>
+	<range></range>
 	<patterns>*</patterns>
 	<directories/>
 </action>
 <action>
 	<icon>drive-harddisk</icon>
 	<name>挂载ISO镜像</name>
+	<submenu></submenu>
 	<unique-id>1636415694098290-2</unique-id>
 	<command>udisksctl loop-setup -f %f</command>
 	<description></description>
+	<range></range>
 	<patterns>*.iso;*.ISO</patterns>
 	<other-files/>
 </action>
 <action>
 	<icon>application-pdf</icon>
 	<name>PDF转图片</name>
+	<submenu></submenu>
 	<unique-id>1639466181682348-1</unique-id>
 	<command>sh -c &apos;pdf_dir=$(basename %f .pdf);mkdir $pdf_dir;pdftoppm -jpeg &quot;%f&quot; &quot;$pdf_dir/$pdf_dir&quot;&apos;</command>
 	<description></description>
+	<range></range>
+	<patterns>*.pdf;*.PDF</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon>application-pdf</icon>
+	<name>合并PDF</name>
+	<submenu></submenu>
+	<unique-id>1680833275559717-1</unique-id>
+	<command>pdfunite %N all.pdf</command>
+	<description></description>
+	<range>*</range>
 	<patterns>*.pdf;*.PDF</patterns>
 	<other-files/>
 </action>
