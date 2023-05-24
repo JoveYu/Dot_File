@@ -1,0 +1,2 @@
+#!/bin/bash
+udisksctl loop-setup -f ${NAUTILUS_SCRIPT_SELECTED_FILE_PATHS}
