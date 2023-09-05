@@ -7,7 +7,7 @@ lvim.plugins = {
 lvim.colorscheme = "solarized"
 lvim.transparent_window = true
 lvim.autocommands = {
-  { "TermOpen", { pattern = { "*" }, command = "setlocal nonumber norelativenumber" } },
+  { "TermOpen", { pattern = { "*" }, command = "setlocal nonumber norelativenumber signcolumn=no" } },
 }
 lvim.builtin.telescope.defaults.file_ignore_patterns = {
   "vendor/",

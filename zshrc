@@ -14,7 +14,6 @@ plugins=(
     cp
     autojump
     python
-    history
     kubectl
     helm
     docker
@@ -42,7 +41,7 @@ export NVM_DIR=$HOME/.nvm
 export GOPATH=$HOME/.gopath
 export NPM_PACKAGES=$HOME/.npm
 export NODE_PATH=$NPM_PACKAGES/lib/node_modules
-export PATH=$NPM_PACKAGES/bin:$GOPATH/bin:$HOME/.krew/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
+export PATH=$NPM_PACKAGES/bin:$GOPATH/bin:$HOME/.local/bin:$HOME/.cargo/bin:$GEM_HOME/ruby/3.0.0/bin:$PATH
 export EDITOR=lvim
 export TERM=xterm-256color
 export GO111MODULE=on
