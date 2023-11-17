@@ -7,23 +7,25 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="jove"
 
 plugins=(
-    git
-    git-flow
-    virtualenv
-    brew
-    cp
-    autojump
-    python
-    kubectl
-    helm
-    docker
-    zsh-syntax-highlighting
-    zsh-autosuggestions
-    history-substring-search
-    extract
-    command-not-found
-    dotnet
+  git
+  git-flow
+  virtualenv
+  brew
+  cp
+  autojump
+  python
+  kubectl
+  helm
+  docker
+  zsh-syntax-highlighting
+  zsh-autosuggestions
+  history-substring-search
+  extract
+  command-not-found
 )
+plugins_contain() {
+  [[ $plugins =~ (^|[[:space:]])$1($|[[:space:]]) ]]
+}
 source $ZSH/oh-my-zsh.sh
 
 
@@ -108,24 +110,28 @@ kube-node-shell() {
     }' --attach "$@"
 }
 
-
-if [ -e ~/.zshrc.local ]
-then
+if [ -e ~/.zshrc.local ]; then
     source  ~/.zshrc.local
 fi
 
+if plugins_contain zsh-autosuggestions; then
+  # remove duplicates path
+  typeset -U PATH
+  # This speeds up pasting w/ autosuggest
+  # https://github.com/zsh-users/zsh-autosuggestions/issues/238
+  pasteinit() {
+    OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+    zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+  }
 
-# remove duplicates path
-typeset -U PATH
-# This speeds up pasting w/ autosuggest
-# https://github.com/zsh-users/zsh-autosuggestions/issues/238
-pasteinit() {
-  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
-  zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
-}
+  pastefinish() {
+    zle -N self-insert $OLD_SELF_INSERT
+  }
+  zstyle :bracketed-paste-magic paste-init pasteinit
+  zstyle :bracketed-paste-magic paste-finish pastefinish
+fi
 
-pastefinish() {
-  zle -N self-insert $OLD_SELF_INSERT
-}
-zstyle :bracketed-paste-magic paste-init pasteinit
-zstyle :bracketed-paste-magic paste-finish pastefinish
+if plugins_contain zsh-autocomplete; then
+  bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+  bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+fi

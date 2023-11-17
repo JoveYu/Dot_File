@@ -1,8 +1,6 @@
-vim.opt.cmdheight = 1
+
 lvim.plugins = {
-  -- { "h-hg/fcitx.nvim" },
   { "ishan9299/nvim-solarized-lua" },
-  -- { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' },
 }
 lvim.colorscheme = "solarized"
 lvim.transparent_window = true

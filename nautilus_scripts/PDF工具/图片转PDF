@@ -1,0 +1,2 @@
+#!/bin/bash
+convert ${NAUTILUS_SCRIPT_SELECTED_FILE_PATHS} -auto-orient all.pdf
