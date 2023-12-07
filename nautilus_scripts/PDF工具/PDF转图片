@@ -1,4 +1,4 @@
 #!/bin/bash
 pdf_dir=$(basename ${NAUTILUS_SCRIPT_SELECTED_FILE_PATHS} .pdf)
 mkdir $pdf_dir
-pdftoppm -jpeg ${NAUTILUS_SCRIPT_SELECTED_FILE_PATHS} $pdf_dir/$pdf_dir
+pdftoppm -jpeg -jpegopt quality=100 -r 300 ${NAUTILUS_SCRIPT_SELECTED_FILE_PATHS} $pdf_dir/$pdf_dir
