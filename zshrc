@@ -22,6 +22,7 @@ plugins=(
   history-substring-search
   extract
   command-not-found
+  sudo
 )
 plugins_contain() {
   [[ $plugins =~ (^|[[:space:]])$1($|[[:space:]]) ]]
@@ -30,10 +31,10 @@ source $ZSH/oh-my-zsh.sh
 
 
 #alias
+alias ip='ip --color=auto'
 alias rm='trash'
 alias vim='lvim'
 alias open='xdg-open'
-alias sudo='sudo '
 
 # export
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES

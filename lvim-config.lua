@@ -1,4 +1,4 @@
-
+vim.opt.list = true
 lvim.plugins = {
   { "ishan9299/nvim-solarized-lua" },
 }
