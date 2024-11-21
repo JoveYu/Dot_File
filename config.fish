@@ -35,13 +35,16 @@ function fish_right_prompt
     set -g __fish_git_prompt_showupstream informative
     set -g __fish_git_prompt_showcolorhints 1
     set -g __fish_git_prompt_use_informative_chars 1
-    set -l vcs (fish_vcs_prompt '%s' 2>/dev/null)
+    set -g __fish_git_prompt_char_dirtystate '*'
+    set -g __fish_git_prompt_char_untrackedfiles '?'
+
+    set -l vcs (fish_vcs_prompt '[git:%s]' 2>/dev/null)
 
     set -q VIRTUAL_ENV_DISABLE_PROMPT
     or set -g VIRTUAL_ENV_DISABLE_PROMPT true
     set -q VIRTUAL_ENV
-    and set -l venv ''(string replace -r '.*/' '' -- "$VIRTUAL_ENV")
+    and set -l venv '[py:'(string replace -r '.*/' '' -- "$VIRTUAL_ENV")']'
 
     set_color normal
-    string join " " -- $venv $vcs " "
+    string join "" -- $venv $vcs
 end
