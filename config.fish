@@ -1,8 +1,11 @@
 set fish_greeting
 
-alias rm='trash'
-alias vim='lvim'
-alias open='xdg-open'
+alias rm=trash
+alias vim=lvim
+alias open=xdg-open
+
+fish_add_path ~/.local/bin/
+fish_add_path ~/.npm/bin/
 
 function fish_prompt
     set -l last_status $status
@@ -23,7 +26,7 @@ function fish_prompt
     # Shorten pwd if prompt is too long
     set -l pwd (set_color brcyan)'['(prompt_pwd)']'$normal
 
-    echo -n -s $pwd $normal $prompt_status $delim
+    echo -n -s $pwd $prompt_status $delim
 end
 
 function fish_right_prompt
@@ -32,17 +35,13 @@ function fish_right_prompt
     set -g __fish_git_prompt_showupstream informative
     set -g __fish_git_prompt_showcolorhints 1
     set -g __fish_git_prompt_use_informative_chars 1
-    # Unfortunately this only works if we have a sensible locale
-    set -g __fish_git_prompt_char_dirtystate '*'
-    set -g __fish_git_prompt_char_untrackedfiles '?'
-
-    set -l vcs (fish_vcs_prompt '[git:%s]' 2>/dev/null)
+    set -l vcs (fish_vcs_prompt '%s' 2>/dev/null)
 
     set -q VIRTUAL_ENV_DISABLE_PROMPT
     or set -g VIRTUAL_ENV_DISABLE_PROMPT true
     set -q VIRTUAL_ENV
-    and set -l venv '[py:'(string replace -r '.*/' '' -- "$VIRTUAL_ENV")']'
+    and set -l venv ''(string replace -r '.*/' '' -- "$VIRTUAL_ENV")
 
     set_color normal
-    string join "" -- $venv $vcs
+    string join " " -- $venv $vcs " "
 end
