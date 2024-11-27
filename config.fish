@@ -1,11 +1,13 @@
 set fish_greeting
 
-alias rm=trash
-alias vim=lvim
-alias open=xdg-open
+alias rm='trash'
+alias vim='lvim'
+alias open='xdg-open'
+alias ip='ip --color'
+alias grep='grep --color=auto'
 
-fish_add_path ~/.local/bin/
-fish_add_path ~/.npm/bin/
+fish_add_path '~/.local/bin/'
+fish_add_path '~/.npm/bin/'
 
 function fish_prompt
     set -l last_status $status
