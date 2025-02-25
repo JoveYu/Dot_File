@@ -9,6 +9,13 @@ alias grep='grep --color=auto'
 fish_add_path '~/.local/bin/'
 fish_add_path '~/.npm/bin/'
 
+export EDITOR=lvim
+export TERM=xterm-256color
+export GOPATH=$HOME/.go
+export GOPROXY=https://goproxy.cn,direct
+export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+
 function fish_prompt
     set -l last_status $status
 
