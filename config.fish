@@ -33,7 +33,7 @@ function fish_prompt
     or set delim (set_color green)$delim$normal
 
     # Shorten pwd if prompt is too long
-    set -l pwd (set_color brcyan)'['(prompt_pwd)']'$normal
+    set -l pwd (set_color cyan)'['(prompt_pwd)']'$normal
 
     echo -n -s $pwd $prompt_status $delim
 end
