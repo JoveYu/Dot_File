@@ -1,7 +1,7 @@
 set fish_greeting
 
 alias rm='trash'
-alias vim='lvim'
+alias vim='nvim'
 alias open='xdg-open'
 alias ip='ip --color'
 alias grep='grep --color=auto'
