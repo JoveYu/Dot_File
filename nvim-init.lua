@@ -19,11 +19,7 @@ require("lazy").setup({
 		{
 			"LazyVim/LazyVim",
 			import = "lazyvim.plugins",
-			opts = {
-				colorscheme = "solarized",
-			},
 		},
-		{ "ishan9299/nvim-solarized-lua" },
 		{
 			"saghen/blink.cmp",
 			opts = {
