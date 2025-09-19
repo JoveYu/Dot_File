@@ -5,6 +5,7 @@ alias vim='nvim'
 alias open='xdg-open'
 alias ip='ip --color'
 alias grep='grep --color=auto'
+alias sudo='run0 --background='
 
 fish_add_path '~/.local/bin/'
 fish_add_path '~/.npm/bin/'
