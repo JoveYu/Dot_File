@@ -17,6 +17,9 @@ export GOPROXY=https://goproxy.cn,direct
 export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
 
+set -l dotfiles (dirname (readlink -f ~/.config/fish/config.fish))
+eval (dircolors -c $dotfiles/dircolors-solarized)
+
 function fish_prompt
     set -l last_status $status
 
