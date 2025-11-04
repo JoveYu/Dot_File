@@ -5,12 +5,12 @@ alias vim='nvim'
 alias open='xdg-open'
 alias ip='ip --color'
 alias grep='grep --color=auto'
-alias sudo='run0 --background='
 
 fish_add_path '~/.local/bin/'
 fish_add_path '~/.npm/bin/'
 
-export EDITOR=lvim
+export EDITOR=nvim
+export PAGER=less
 export TERM=xterm-256color
 export GOPATH=$HOME/.go
 export GOPROXY=https://goproxy.cn,direct
