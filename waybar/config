@@ -1,0 +1,95 @@
+{
+  "bar_id": "bar-0",
+  "ipc": true,
+  "layer": "top",
+  "position": "top",
+  "height": 24,
+  "spacing": 12,
+  "modules-left": [
+    "sway/workspaces",
+    "sway/mode",
+    "sway/window"
+  ],
+  "modules-center": [
+  ],
+  "modules-right": [
+    "mpris",
+    "network",
+    "bluetooth",
+    "cpu",
+    "memory",
+    "temperature",
+    //"backlight",
+    "battery",
+    "wireplumber",
+    "clock",
+    "tray"
+  ],
+  "tray": {
+    "spacing": 10
+  },
+  "clock": {
+    "interval": 60,
+    "tooltip-format": "{calendar}",
+    "format": " {:%m-%d %H:%M %a}"
+  },
+  "cpu": {
+    "format": " {usage}%"
+  },
+  "memory": {
+    "format": " {}%"
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "format": " {temperatureC}°C",
+    "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input"
+  },
+  "backlight": {
+    "format": " {percent}%",
+    "on-click": "brightnessctl set +5%",
+    "on-click-right": "brightnessctl set 5%-",
+    "on-scroll-up": "brightnessctl set +1%",
+    "on-scroll-down": "brightnessctl set 1%-"
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-icons": [
+      "󰁺",
+      "󰁼",
+      "󰁿",
+      "󰂁",
+      "󰁹"
+    ],
+    "format-full": "",
+    "tooltip-format": "{power}W {time}"
+  },
+  "network": {
+    "format": "{ifname}",
+    "format-wifi": " {essid} ({signalStrength}%)",
+    "format-ethernet": "󰊗 {ipaddr}/{cidr}",
+    "format-disconnected": "",
+    "max-length": 50
+  },
+  "bluetooth": {
+    "format": " {status}",
+    "format-disabled": ""
+  },
+  "mpris": {
+    "format": "▶ {title}-{artist}",
+    "format-paused": "⏸ {title}-{artist}"
+  },
+  "wireplumber": {
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "on-click": "helvum",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ]
+  }
+}

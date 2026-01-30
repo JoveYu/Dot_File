@@ -1,0 +1,58 @@
+/* 全局字体 */
+* {
+    font-family: "Noto Sans Mono CJK SC", monospace;
+    font-size: 14px;
+    border: none;
+    border-radius: 0;
+}
+
+/* 状态栏本体：全透明背景 */
+window#waybar {
+    background: rgba(20, 20, 20, 0.8); /* 极暗半透明 */
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+/* 每个模块的通用样式 */
+#workspaces button,
+#clock,
+#pulseaudio,
+#network,
+#battery,
+#tray {
+    padding: 0;
+    color: #e0e0e0;
+}
+
+/* 工作区样式：简洁的下划线或高亮 */
+#workspaces button {
+    background-color: transparent;
+    color: #666666; /* 非活动状态灰色 */
+}
+
+#workspaces button.focused {
+    color: #ffffff; /* 活动状态白色 */
+    box-shadow: inset 0 -3px #ffffff;
+}
+
+#workspaces button.urgent {
+    color: #eb4d4b;
+}
+
+/* 电池警告状态 */
+#battery.critical:not(.charging) {
+    color: #f53c3c;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}

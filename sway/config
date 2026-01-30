@@ -1,0 +1,30 @@
+set $mod Mod4
+
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term footclient
+
+floating_modifier $mod normal
+
+bindsym $mod+Shift+c reload
+
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+
+bar {
+  position top    
+  swaybar_command waybar
+}
+
+default_border pixel
+default_floating_border pixel
+smart_borders on
+
+titlebar_border_thickness 0
+titlebar_padding 2
+
+include /etc/sway/config.d/*
+include ~/.config/sway/config.d/*.conf
