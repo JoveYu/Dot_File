@@ -64,8 +64,7 @@
       "󰂁",
       "󰁹"
     ],
-    "format-full": "",
-    "tooltip-format": "{power}W {time}"
+    "format-full": ""
   },
   "network": {
     "format": "{ifname}",
@@ -84,8 +83,8 @@
   },
   "wireplumber": {
     "format": "{icon} {volume}%",
-    "format-muted": "",
-    "on-click": "helvum",
+    "format-muted": "",
+    "on-click": "pavucontrol",
     "format-icons": [
       "",
       "",
