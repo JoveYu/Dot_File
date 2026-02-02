@@ -8,7 +8,7 @@
 
 /* 状态栏本体：全透明背景 */
 window#waybar {
-    background: rgba(20, 20, 20, 0.8); /* 极暗半透明 */
+    background: rgba(20, 20, 20, 1.0); /* 极暗半透明 */
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
