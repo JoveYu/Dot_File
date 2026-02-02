@@ -1,0 +1,49 @@
+window {
+    margin: 0px;
+    background-color: transparent;
+    font-size: 16px;
+}
+
+#outer-box {
+    margin: 5px;
+    border: 2px solid #82aaff;
+    background-color: #222436;
+    border-radius: 12px;
+}
+
+#input {
+    margin: 10px;
+    border: none;
+    border-radius: 8px;
+    color: #c8d3f5;
+    background-color: #1b1d2b; /* regular0 - darker background */
+    box-shadow: none;
+}
+
+#input:focus {
+    outline: 2px solid #c099ff;
+    outline-offset: -2px;
+}
+
+#text {
+    margin: 5px;
+    border: none;
+    color: #828bb8; /* regular7 - muted foreground */
+}
+
+#text:selected {
+    color: #c8d3f5; /* selection-foreground */
+}
+
+#entry {
+    margin: 2px 10px;
+    border: none;
+    border-radius: 8px;
+}
+
+#entry:selected {
+    background-color: #2d3f76; /* selection-background */
+    outline: none;
+}
+
+

@@ -10,8 +10,7 @@
     "sway/mode",
     "sway/window"
   ],
-  "modules-center": [
-  ],
+  "modules-center": [],
   "modules-right": [
     "mpris",
     "network",

@@ -8,19 +8,12 @@
 
 /* 状态栏本体：全透明背景 */
 window#waybar {
-    background: rgba(20, 20, 20, 1.0); /* 极暗半透明 */
-    color: #ffffff;
-    transition-property: background-color;
-    transition-duration: .5s;
+    background: #222436;
+    color: #c8d3f5;
 }
 
 /* 每个模块的通用样式 */
-#workspaces button,
-#clock,
-#pulseaudio,
-#network,
-#battery,
-#tray {
+#workspaces button{
     padding: 0;
     color: #e0e0e0;
 }
@@ -28,31 +21,14 @@ window#waybar {
 /* 工作区样式：简洁的下划线或高亮 */
 #workspaces button {
     background-color: transparent;
-    color: #666666; /* 非活动状态灰色 */
+    color: #828bb8;
 }
 
 #workspaces button.focused {
-    color: #ffffff; /* 活动状态白色 */
+    color: #c8d3f5;
     box-shadow: inset 0 -3px #ffffff;
 }
 
 #workspaces button.urgent {
-    color: #eb4d4b;
-}
-
-/* 电池警告状态 */
-#battery.critical:not(.charging) {
-    color: #f53c3c;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
+    color: #ff757f;
 }
