@@ -1,0 +1,20 @@
+# --- TokyoNight 配色方案 ---
+
+# 背景色：Storm 深蓝 (#24283b)
+background-color=#24283b
+
+# 文字颜色：主要前景色 (#c0caf5)
+text-color=#c0caf5
+
+# 边框颜色：亮蓝色 (#7aa2f7)
+border-color=#7aa2f7
+
+# 进度条颜色：青色 (#7dcfff)
+progress-color=over #7dcfff
+
+# --- 不同优先级的自定义 ---
+
+[urgency=high]
+# 紧急通知边框：红色 (#f7768e)
+border-color=#f7768e
+default-timeout=0
