@@ -30,7 +30,25 @@
   "clock": {
     "interval": 60,
     "tooltip-format": "{calendar}",
-    "format": " {:%m-%d %H:%M %a}"
+    "format": " {:%m-%d %H:%M %a}",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "left",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
   },
   "cpu": {
     "format": " {usage}%"
@@ -68,18 +86,17 @@
   },
   "network": {
     "format": "{ifname}",
-    "format-wifi": " {essid} ({signalStrength}%)",
-    "format-ethernet": "󰊗 {ipaddr}/{cidr}",
-    "format-disconnected": "",
-    "max-length": 50
+    "format-wifi": "󰖩 {essid} ({signalStrength}%)",
+    "format-ethernet": "󰈀 {ipaddr}/{cidr}",
+    "format-disconnected": ""
   },
   "bluetooth": {
     "format": " {status}",
     "format-disabled": ""
   },
   "mpris": {
-    "format": "▶ {title}-{artist}",
-    "format-paused": "⏸ {title}-{artist}"
+    "format": "󰐊 {title}-{artist}",
+    "format-paused": "󰏤 {title}-{artist}"
   },
   "wireplumber": {
     "format": "{icon} {volume}%",
