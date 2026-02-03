@@ -47,3 +47,13 @@ window {
 }
 
 
+/* Make application icons transparent in drun mode so they don't show a
+   white background. Targets generic image/icon widgets used by wofi. */
+image,
+.icon,
+.app-icon {
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    border-radius: 0;
+}
