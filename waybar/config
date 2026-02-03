@@ -37,11 +37,11 @@
       "weeks-pos": "left",
       "on-scroll": 1,
       "format": {
-        "months": "<span color='#ffead3'><b>{}</b></span>",
-        "days": "<span color='#ecc6d9'><b>{}</b></span>",
-        "weeks": "<span color='#99ffdd'><b>{}</b></span>",
-        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+        "months":   "<span color='#bb9af7'><b>{}</b></span>",   // 紫色 - 对应月份
+        "days":     "<span color='#c0caf5'><b>{}</b></span>",   // 浅蓝灰 - 对应常规日期
+        "weeks":    "<span color='#7dcfff'><b>{}</b></span>",   // 天蓝色 - 对应周数
+        "weekdays": "<span color='#e0af68'><b>{}</b></span>",   // 橙黄色 - 对应周几
+        "today":    "<span color='#ff9e64'><b><u>{}</u></b></span>" // 橘色下划线 - 对应今天
       }
     },
     "actions": {
