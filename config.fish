@@ -6,8 +6,18 @@ alias open='xdg-open'
 alias ip='ip --color'
 alias grep='grep --color=auto'
 
+alias ls='eza'
+alias ll='eza -l --git'
+alias la='eza -a'
+alias lt='eza --tree'
+alias cat='bat -p'
+alias find='fd'
+alias grep='rg'
+alias reload='exec fish'
+
 fish_add_path '~/.local/bin/'
 fish_add_path '~/.npm/bin/'
+fish_add_path '~/.bun/bin/'
 
 export EDITOR=nvim
 export PAGER=less
@@ -18,7 +28,8 @@ export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
 export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
 
 set -l dotfiles (dirname (readlink -f ~/.config/fish/config.fish))
-eval (dircolors -c $dotfiles/dircolors-solarized)
+
+zoxide init fish | source
 
 function fish_prompt
     set -l last_status $status
